@@ -8,9 +8,9 @@ import { localeNames, type Locale } from "@/lib/i18n";
 import { useLocale } from "@/components/locale-provider";
 
 const shellCopy = {
-  en: { home: "Home", photo: "Photo Enhancement", feedback: "Guest Feedback QR", contact: "Free Assessment", descriptor: "Hospitality revenue optimization", copyright: "All rights reserved." },
-  ja: { home: "ホーム", photo: "客室写真の見せ方改善", feedback: "ご意見受付QR", contact: "無料診断", descriptor: "宿泊施設の集客改善", copyright: "無断転載を禁じます。" },
-  zh: { home: "首页", photo: "客房图片优化", feedback: "住客反馈二维码", contact: "免费评估", descriptor: "酒店获客与客诉改善", copyright: "版权所有。" },
+  en: { home: "Home", photo: "Photo Enhancement", feedback: "Service Recovery", contact: "Free Assessment", descriptor: "Hospitality revenue optimization", copyright: "All rights reserved." },
+  ja: { home: "ホーム", photo: "客室写真の見せ方改善", feedback: "サービスリカバリー", contact: "無料診断", descriptor: "宿泊施設の集客改善", copyright: "無断転載を禁じます。" },
+  zh: { home: "首页", photo: "客房图片优化", feedback: "住中客诉系统", contact: "免费评估", descriptor: "酒店获客与客诉改善", copyright: "版权所有。" },
 } as const;
 
 export function SiteHeader() {

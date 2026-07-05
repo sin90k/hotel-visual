@@ -10,6 +10,7 @@ const feedbackCopy = {
     problemTitle: "Most public complaints started as solvable problems.", problemBody: "A missing towel, noisy air conditioner or slow response can become a one-star review when guests do not know who to tell.",
     benefits: [["Private first", "Feedback goes directly to your team—not to a public review site."], ["Act sooner", "Know what happened while there is still time to make it right."], ["Simple for guests", "No app, account or long form. Scan, select and send."]],
     stepsTitle: "From guest issue to a resolved stay.", steps: [["Guest notices an issue", "A room or service problem affects the stay."], ["Scan QR", "The guest scans the room-specific Guest Feedback QR."], ["Hotel receives an alert", "The team receives the room number and issue details."], ["Issue resolved", "Staff follow up while the guest is still on the property."], ["Avoid a negative review", "A resolved issue is less likely to become a public complaint."]],
+    example: { eyebrow: "Example scenario", title: "How one guest report reaches the right team", note: "Illustrative product scenario — not client performance data.", event: "Room 1208 · Air-conditioning noise", timeline: [["22:14", "Guest submits report", "The guest reports that AC noise is affecting sleep."], ["22:15", "Front desk receives alert", "Room number, category and message arrive together."], ["22:20", "Engineering follows up", "The team confirms a suitable time to inspect the room."], ["22:42", "Hotel closes the loop", "The guest is contacted again after the issue is handled."]], resultTitle: "What the hotel gains", results: ["A clear record of the complaint", "The right department is notified sooner", "A chance to respond before checkout"] },
     price: "Starting from $29 / room", final: "Give guests an easier way to speak up.", demo: "Get Guest Feedback QR", why: "Why it matters", how: "How it works", demoUi: { room: "Room 1208", question: "How can we help?", issue: "Room issue", housekeeping: "Housekeeping", other: "Something else", private: "Sent privately to the hotel team" },
   },
   ja: {
@@ -17,6 +18,7 @@ const feedbackCopy = {
     problemTitle: "低評価のきっかけは、滞在中の小さな行き違いかもしれません。", problemBody: "タオルが足りない、空調の音が気になる、スタッフに伝える方法が分からない。早く気づければ解決できたことも、声を拾えないままでは口コミに残ってしまいます。",
     benefits: [["施設へ直接届く", "投稿サイトを経由せず、内容と客室番号をスタッフが確認できます。"], ["チェックアウト前に対応", "滞在中に状況を把握できるため、その場での案内や対応が可能です。"], ["ゲストに負担をかけない", "アプリも会員登録も不要。読み取り、選択、送信だけで完了します。"]],
     stepsTitle: "ゲストの声を、滞在中の対応につなげます。", steps: [["困りごとが発生", "客室やサービスについて、ゲストが不便を感じます。"], ["客室のQRを読み取る", "スマートフォンから、該当する内容を選んで送信します。"], ["スタッフへ通知", "客室番号と内容が、施設の担当者へ届きます。"], ["その場で対応", "チェックアウト前に状況を確認し、必要な対応を行います。"], ["低評価口コミを防ぐ", "解決できる不満を、未対応のまま残しません。"]],
+    example: { eyebrow: "利用イメージ", title: "ゲストの声が、担当スタッフへ届くまで", note: "以下は製品の利用イメージです。実際の導入実績を示すものではありません。", event: "客室1208 · 空調の音", timeline: [["22:14", "ゲストが送信", "空調の音で眠りにくいことを、客室のQRから伝えます。"], ["22:15", "フロントへ通知", "客室番号・内容・送信時刻がまとめて届きます。"], ["22:20", "設備担当が連絡", "入室可能な時間を確認し、点検に向かいます。"], ["22:42", "対応後に確認", "対応内容を記録し、ゲストへ状況を確認します。"]], resultTitle: "施設側に残るもの", results: ["ご意見と対応内容の記録", "担当部署への早めの共有", "チェックアウト前に対応する機会"] },
     price: "1室 $29〜", final: "言いづらい不満を、早めに拾える施設へ。", demo: "導入について相談する", why: "滞在中に声を拾う理由", how: "ご利用の流れ", demoUi: { room: "客室 1208", question: "お困りのことをお知らせください", issue: "客室設備について", housekeeping: "清掃・備品について", other: "その他のご相談", private: "内容は施設スタッフだけに届きます" },
   },
   zh: {
@@ -24,6 +26,7 @@ const feedbackCopy = {
     problemTitle: "很多差评，本来可以在住客退房前解决", problemBody: "少一条毛巾、空调噪声太大、客房清洁不到位，往往都不难处理。真正麻烦的是酒店一直不知道，直到差评已经发到平台上。",
     benefits: [["客诉直达酒店", "住客提交的内容只发给酒店工作人员，不会公开发布。"], ["趁住客还在店及时处理", "及时知道房号和不满事项，前台、客房或工程人员才能尽快跟进。"], ["住客扫码就能反馈", "不用下载应用，也不用注册账号，几步即可提交。"]],
     stepsTitle: "从住客提出不满，到酒店及时处理", steps: [["入住期间产生不满", "住客对客房设施、卫生或服务感到不满意。"], ["扫描房间二维码", "住客选择客诉类型，并填写需要酒店处理的事项。"], ["酒店收到客诉提醒", "工作人员看到房号、客诉内容和提交时间。"], ["退房前跟进处理", "相关部门及时联系住客并安排处理。"], ["减少公开差评", "能在店内解决的客诉，不再拖到住客离店以后。"]],
+    example: { eyebrow: "场景示例", title: "一条客诉，如何在退房前被接住", note: "以下为产品使用示例，用于说明处理流程，不代表真实客户数据。", event: "房间1208 · 空调噪声", timeline: [["22:14", "住客扫码提交", "住客反馈空调运行噪声较大，已经影响休息。"], ["22:15", "前台收到提醒", "房号、客诉类型和具体内容同时发送给酒店。"], ["22:20", "工程人员联系住客", "确认方便上门检查的时间，并开始跟进。"], ["22:42", "处理后再次回访", "工作人员记录处理结果，并向住客确认当前情况。"]], resultTitle: "酒店得到什么", results: ["客诉内容和处理记录更清楚", "前台与相关部门更早知道", "住客退房前仍有补救机会"] },
     price: "$29 / 间起", final: "别等差评发出来，才知道住客哪里不满意", demo: "申请产品演示", why: "为什么要提前接住客诉", how: "客诉处理流程", demoUi: { room: "房间 1208", question: "您对本次入住哪里不满意？", issue: "客房设施", housekeeping: "卫生与清洁", other: "其他客诉", private: "仅酒店工作人员可见" },
   },
 } as const;
@@ -38,6 +41,7 @@ export default function GuestFeedbackPage() {
       <section className="feedback-problem"><div><p className="eyebrow"><span />{copy.why}</p><h2>{copy.problemTitle}</h2></div><p>{copy.problemBody}</p></section>
       <section className="feedback-benefits">{copy.benefits.map(([title, body], index) => { const Icon = [ShieldCheck, Clock3, QrCode][index]; return <article key={title}><Icon /><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>; })}</section>
       <section className="feedback-steps"><p className="eyebrow"><span />{copy.how}</p><h2>{copy.stepsTitle}</h2><div>{copy.steps.map(([title, body], index) => <article key={title}><b>0{index + 1}</b><h3>{title}</h3><p>{body}</p></article>)}</div></section>
+      <section className="feedback-example"><div className="feedback-example-heading"><div><p className="eyebrow"><span />{copy.example.eyebrow}</p><h2>{copy.example.title}</h2></div><p>{copy.example.note}</p></div><div className="feedback-example-board"><div className="feedback-event"><QrCode /><span>{copy.example.event}</span></div><div className="feedback-timeline">{copy.example.timeline.map(([time,title,body],index)=>{const Icon=[MessageSquareWarning,Clock3,ShieldCheck,Check][index];return <article key={time}><span>{time}</span><Icon/><div><h3>{title}</h3><p>{body}</p></div></article>})}</div><aside><strong>{copy.example.resultTitle}</strong>{copy.example.results.map(item=><p key={item}><Check/>{item}</p>)}</aside></div></section>
       <section className="feedback-final"><div><p>{copy.price}</p><h2>{copy.final}</h2></div><a className="button button-gold" href="mailto:hello@ottervisual.com">{copy.demo}<ArrowRight /></a></section>
       <SiteFooter />
     </main>

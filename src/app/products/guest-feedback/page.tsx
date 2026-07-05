@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Building2, Check, ClipboardCheck, Clock3, FileBarChart, LayoutDashboard, MessageSquareWarning, QrCode, ShieldCheck, Smartphone, Star, Users } from "lucide-react";
+import { AlertTriangle, ArrowRight, BellRing, Building2, Check, ClipboardCheck, Clock3, FileBarChart, LayoutDashboard, MessageSquareWarning, QrCode, ShieldCheck, Smartphone, Star, Users, Wrench } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
 
@@ -37,6 +37,12 @@ const feedbackCopy = {
   },
 } as const;
 
+const dashboardCopy = {
+  en: { title: "Manager dashboard", sample: "Sample interface", stats: [["Open", "12"], ["High risk", "3"], ["Overdue", "2"], ["In progress", "7"]], queue: "Live work orders", tickets: [["1208", "AC noise affecting sleep", "High risk", "Engineering"], ["0816", "Extra towels requested", "Assigned", "Housekeeping"], ["1512", "Hot water temperature", "In progress", "Engineering"]], updated: "Updated just now" },
+  ja: { title: "責任者ダッシュボード", sample: "画面イメージ", stats: [["未対応", "12"], ["高リスク", "3"], ["期限超過", "2"], ["対応中", "7"]], queue: "対応タスク", tickets: [["1208", "空調の音で眠れない", "高リスク", "設備"], ["0816", "タオルの追加希望", "担当済み", "客室"], ["1512", "お湯の温度が低い", "対応中", "設備"]], updated: "たった今更新" },
+  zh: { title: "经理看板", sample: "界面示意", stats: [["待处理", "12"], ["高风险", "3"], ["已超时", "2"], ["处理中", "7"]], queue: "实时工单", tickets: [["1208", "空调噪声影响休息", "高风险", "工程部"], ["0816", "需要补送两条毛巾", "已派单", "客房部"], ["1512", "热水温度偏低", "处理中", "工程部"]], updated: "刚刚更新" },
+} as const;
+
 export default function GuestFeedbackPage() {
   const { locale } = useLocale();
   const copy = feedbackCopy[locale];
@@ -46,8 +52,8 @@ export default function GuestFeedbackPage() {
       <section className="feedback-hero"><div><p className="eyebrow light"><span />{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.body}</p><a className="button button-gold" href="mailto:hello@ottervisual.com">{copy.cta}<ArrowRight /></a></div><FeedbackDemo copy={copy.demoUi} /></section>
       <section className="feedback-problem"><div><p className="eyebrow"><span />{copy.why}</p><h2>{copy.problemTitle}</h2></div><p>{copy.problemBody}</p></section>
       <section className="feedback-benefits">{copy.benefits.map(([title, body], index) => { const Icon = [ShieldCheck, Clock3, QrCode][index]; return <article key={title}><Icon /><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>; })}</section>
-      <section className="feedback-system"><div className="feedback-system-intro"><p className="eyebrow light"><span />{copy.system.eyebrow}</p><h2>{copy.system.title}</h2><p>{copy.system.body}</p></div><div className="feedback-capabilities">{copy.system.capabilities.map(([title,body],index)=>{const Icon=[QrCode,Smartphone,ShieldCheck,ClipboardCheck,Users,LayoutDashboard,FileBarChart][index];return <article key={title}><span>0{index+1}</span><Icon/><h3>{title}</h3><p>{body}</p></article>})}</div></section>
-      <section className="feedback-steps"><p className="eyebrow"><span />{copy.how}</p><h2>{copy.stepsTitle}</h2><div>{copy.steps.map(([title, body], index) => <article key={title}><b>0{index + 1}</b><h3>{title}</h3><p>{body}</p></article>)}</div></section>
+      <section className="feedback-system"><div className="feedback-system-intro"><p className="eyebrow light"><span />{copy.system.eyebrow}</p><h2>{copy.system.title}</h2><p>{copy.system.body}</p></div><OperationsBoard locale={locale} capabilities={copy.system.capabilities}/></section>
+      <section className="feedback-steps"><p className="eyebrow"><span />{copy.how}</p><h2>{copy.stepsTitle}</h2><div>{copy.steps.map(([title, body], index) => {const Icon=[Smartphone,MessageSquareWarning,ShieldCheck,ClipboardCheck,Users,LayoutDashboard,Check][index];return <article key={title}><b>0{index + 1}</b><Icon/><h3>{title}</h3><p>{body}</p></article>})}</div></section>
       <section className="feedback-example"><div className="feedback-example-heading"><div><p className="eyebrow"><span />{copy.example.eyebrow}</p><h2>{copy.example.title}</h2></div><p>{copy.example.note}</p></div><div className="feedback-example-board"><div className="feedback-event"><QrCode /><span>{copy.example.event}</span></div><div className="feedback-timeline">{copy.example.timeline.map(([time,title,body],index)=>{const Icon=[MessageSquareWarning,Clock3,ShieldCheck,Check][index];return <article key={time}><span>{time}</span><Icon/><div><h3>{title}</h3><p>{body}</p></div></article>})}</div><aside><strong>{copy.example.resultTitle}</strong>{copy.example.results.map(item=><p key={item}><Check/>{item}</p>)}</aside></div></section>
       <section className="feedback-roles"><div><p className="eyebrow light"><span />{copy.roles.eyebrow}</p><h2>{copy.roles.title}</h2></div><div>{copy.roles.items.map(([title,body],index)=>{const Icon=[Smartphone,Users,LayoutDashboard,Building2][index];return <article key={title}><Icon/><h3>{title}</h3><p>{body}</p></article>})}</div></section>
       <section className="feedback-final"><div><p>{copy.price}</p><h2>{copy.final}</h2></div><a className="button button-gold" href="mailto:hello@ottervisual.com">{copy.demo}<ArrowRight /></a></section>
@@ -58,4 +64,10 @@ export default function GuestFeedbackPage() {
 
 function FeedbackDemo({ copy }: { copy: { readonly room: string; readonly question: string; readonly issue: string; readonly housekeeping: string; readonly other: string; readonly private: string } }) {
   return <div className="feedback-demo"><div className="demo-top"><QrCode /><span>{copy.room}</span></div><div className="demo-card"><p>{copy.question}</p>{[[copy.issue, MessageSquareWarning], [copy.housekeeping, Check], [copy.other, Star]].map(([label, Icon]) => { const C = Icon as typeof Check; return <div key={label as string}><C /><span>{label as string}</span><ArrowRight /></div>; })}</div><div className="demo-status"><ShieldCheck /><span>{copy.private}</span></div></div>;
+}
+
+function OperationsBoard({ locale, capabilities }: { locale: "en" | "ja" | "zh"; capabilities: readonly (readonly [string, string])[] }) {
+  const copy = dashboardCopy[locale];
+  const icons = [QrCode, Smartphone, ShieldCheck, ClipboardCheck, Users, LayoutDashboard, FileBarChart];
+  return <div className="operations-showcase"><div className="operations-board"><header><div><LayoutDashboard/><strong>{copy.title}</strong></div><span>{copy.sample}</span></header><div className="operations-stats">{copy.stats.map(([label,value],index)=><div key={label}><span>{label}</span><b>{value}</b>{[ClipboardCheck,AlertTriangle,Clock3,Users].map((Icon)=><Icon key={Icon.displayName}/>) [index]}</div>)}</div><div className="operations-queue"><div><strong>{copy.queue}</strong><span><BellRing/>{copy.updated}</span></div>{copy.tickets.map(([room,issue,status,team],index)=><article key={room}><b>{room}</b><div><strong>{issue}</strong><span>{team}</span></div><em className={index===0?"risk":index===2?"progress":"assigned"}>{status}</em>{index===0?<Wrench/>:<ArrowRight/>}</article>)}</div></div><div className="capability-rail">{capabilities.map(([title,body],index)=>{const Icon=icons[index];return <div key={title} title={body}><Icon/><span>{title}</span></div>})}</div></div>;
 }

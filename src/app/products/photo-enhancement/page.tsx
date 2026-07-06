@@ -154,11 +154,7 @@ export default function Home() {
 
       <section className="section case-section" id="cases">
         <Reveal className="section-intro split-intro"><div><p className="eyebrow"><span />{copy.cases.eyebrow}</p><h2>{copy.cases.title}</h2></div><p>{copy.cases.note}</p></Reveal>
-        <div className="outcome-grid">{copy.cases.outcomes.map((item, index) => <Reveal className="outcome-item" key={item}><span>{String(index + 1).padStart(2, "0")}</span><p>{item}</p></Reveal>)}</div>
-        <div className="case-layout">
-          <Reveal className="case-main"><div className="case-image"><Image src="/images/photo-enhancement-v2.png" alt={copy.cases.mainLabel} fill sizes="(max-width: 900px) 100vw, 65vw" /></div><div className="case-copy"><span>01 / {copy.cases.mainLabel.toUpperCase()}</span><h3>{copy.cases.mainTitle}</h3><div><p>{copy.cases.impact}</p><strong>{copy.cases.main}</strong></div></div></Reveal>
-          <div className="case-side"><Reveal className="mini-case"><Image src="/images/room-upgrade-preview-v2.png" alt={copy.cases.secondaryLabel} fill sizes="35vw" /><div><span>02 / {copy.cases.secondaryLabel.toUpperCase()}</span><p>{copy.cases.secondary}</p></div></Reveal><Reveal className="mini-case"><Image src="/images/villa-presentation-v2.png" alt={copy.cases.thirdLabel} fill sizes="35vw" /><div><span>03 / {copy.cases.thirdLabel.toUpperCase()}</span><h3>{copy.cases.thirdTitle}</h3><p>{copy.cases.third}</p></div></Reveal></div>
-        </div>
+        <div className="outcome-grid">{copy.cases.outcomes.map(([title, body], index) => { const Icon = [Eye, Gauge, Sparkles, MousePointer2][index]; return <Reveal className="outcome-item" key={title}><span>{String(index + 1).padStart(2, "0")}</span><Icon /><h3>{title}</h3><p>{body}</p></Reveal>; })}</div>
       </section>
 
       <section className="review-section" id="review">

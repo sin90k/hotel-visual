@@ -168,7 +168,7 @@ export default function Home() {
 
       <section className="contact-section" id="contact">
         <div><p className="eyebrow"><span />{copy.contact.eyebrow}</p><h2>{copy.contact.title}</h2></div>
-        <div className="contact-list"><a href="mailto:hello@ottervisual.com"><Mail />hello@ottervisual.com</a><a href="https://wa.me/0000000000"><MessageCircle />WhatsApp</a><span><MapPin />{copy.contact.location}</span></div>
+        <div className="contact-list"><a href="mailto:hello@ottervisual.com"><Mail />hello@ottervisual.com</a><a href="https://wa.me/8618905957718"><MessageCircle />WhatsApp +86 189 0595 7718</a><span><MapPin />{copy.contact.location}</span></div>
       </section>
 
       <SiteFooter />

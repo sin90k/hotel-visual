@@ -171,7 +171,7 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
 .feedback-capabilities article:nth-child(even) { border-right:0; }.feedback-capabilities article:last-child { grid-column:1/-1; border-right:0; }
 .feedback-capabilities article>span { color:#d8b97d; font-size:10px; letter-spacing:.12em; }.feedback-capabilities article>svg { width:20px; color:#d8b97d; }
 .feedback-capabilities h3 { grid-column:1/-1; margin:48px 0 12px; font:400 25px/1.2 var(--font-serif); }.feedback-capabilities p { grid-column:1/-1; color:#d2d3cc; font-size:13px; line-height:1.65; }
-.feedback-steps { padding:120px 7.2vw; background:var(--ivory); }.feedback-steps>h2 { max-width:900px; }.feedback-steps>div { display:grid; grid-template-columns:repeat(7,1fr); gap:18px; margin-top:65px; }.feedback-steps article { padding-top:25px; border-top:1px solid var(--line); }.feedback-steps b { color:var(--gold); font-size:11px; letter-spacing:.13em; }.feedback-steps article>svg { width:30px; height:30px; margin-top:28px; padding:7px; border:1px solid var(--line); color:var(--olive); }.feedback-steps h3 { font:400 20px/1.3 var(--font-serif); margin:20px 0 0; }.feedback-steps article p { display:none; color:var(--ink); font-size:12px; line-height:1.65; }
+.feedback-steps { padding:110px 7.2vw 125px; background:var(--ivory); }.feedback-steps>h2 { max-width:900px; }.feedback-steps>div { display:grid; grid-template-columns:repeat(12,1fr); gap:22px; margin-top:58px; }.feedback-steps article { grid-column:span 3; min-height:285px; padding:26px; display:flex; flex-direction:column; align-items:flex-start; background:rgba(255,255,255,.72); border:1px solid var(--line); position:relative; transition:transform .25s ease,border-color .25s ease; }.feedback-steps article:nth-child(n+5) { grid-column:span 4; }.feedback-steps article:hover { transform:translateY(-4px); border-color:#c9ad78; }.feedback-steps article:first-child,.feedback-steps article:last-child { background:var(--charcoal); color:var(--white); border-color:var(--charcoal); }.feedback-steps b { color:var(--gold); font-size:11px; letter-spacing:.14em; }.feedback-steps article>svg { width:50px; height:50px; margin-top:34px; padding:13px; border:1px solid var(--line); color:var(--olive); }.feedback-steps article:first-child>svg,.feedback-steps article:last-child>svg { border-color:#55564f; color:#d8b97d; }.feedback-steps h3 { font:400 25px/1.25 var(--font-serif); margin:34px 0 12px; }.feedback-steps article p { display:block; margin-top:auto; color:var(--ink); font-size:13px; line-height:1.65; }.feedback-steps article:first-child p,.feedback-steps article:last-child p { color:#bdbdb5; }
 .feedback-final { padding:72px 7.2vw; display:flex; align-items:center; justify-content:space-between; gap:48px; background:var(--olive); color:var(--white); }.feedback-final p { color:#d6b67b; margin-bottom:12px; }.feedback-final h2 { max-width:680px; }
 .feedback-example { padding:120px 7.2vw; background:var(--white); }
 .feedback-example-heading { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr); gap:8vw; align-items:end; margin-bottom:58px; }
@@ -378,6 +378,9 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
   .feedback-roles article { min-height:170px; padding:24px; }
   .feedback-roles h3 { margin-top:26px; }
   .feedback-final { padding:60px 22px; gap:30px; }
+  .feedback-steps>div { grid-template-columns:1fr 1fr; gap:16px; }
+  .feedback-steps article,.feedback-steps article:nth-child(n+5) { grid-column:auto; min-height:260px; }
+  .feedback-steps article:last-child { grid-column:1/-1; }
   html[lang="zh-CN"] .feedback-page h1,html[lang="zh-CN"] .feedback-page h2,html[lang="zh-CN"] .feedback-page h3 { word-break:normal; }
   html[lang="zh-CN"] .feedback-hero h1,html[lang="en"] .feedback-hero h1 { font-size:44px; line-height:1.14; }
   html[lang="zh-CN"] .feedback-problem h2,html[lang="zh-CN"] .feedback-steps h2,html[lang="zh-CN"] .feedback-example-heading h2,html[lang="zh-CN"] .feedback-system-intro h2,html[lang="zh-CN"] .feedback-roles h2,html[lang="zh-CN"] .feedback-final h2 { font-size:42px; line-height:1.16; }
@@ -386,4 +389,9 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
   html[lang="ja"] .feedback-hero h1 { font-size:46px; line-height:1.14; }
   html[lang="ja"] .demo-card>p { font-size:24px; word-break:auto-phrase; line-break:strict; }
   html[lang="ja"] .section-intro h2,html[lang="ja"] .services-title h2,html[lang="ja"] .review-copy h2,html[lang="ja"] .contact-section h2 { font-size:42px; line-height:1.16; }
+}
+
+@media (max-width:560px) {
+  .feedback-steps>div { grid-template-columns:1fr; }
+  .feedback-steps article,.feedback-steps article:last-child { grid-column:1; min-height:230px; }
 }

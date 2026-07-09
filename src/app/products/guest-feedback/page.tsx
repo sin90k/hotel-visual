@@ -7,8 +7,8 @@ import { SiteFooter, SiteHeader } from "@/components/site-shell";
 
 const feedbackCopy = {
   en: {
-    eyebrow: "In-stay service recovery", title: "Resolve Issues Before Checkout", body: "Guests report by QR. Teams receive, assign and close each case.", cta: "Request a demo", back: "All products",
-    problemTitle: "Solve It Before It Becomes a Review", problemBody: "Early visibility gives the hotel time to respond.",
+    eyebrow: "Guest Feedback QR", title: "Catch guest issues before checkout.", body: "Guests scan a room QR and open a mobile web page—no app or account required. Each report is triaged, assigned, handled and tracked through to closure.", cta: "Request a demo", back: "All products",
+    problemTitle: "Most public complaints start as solvable issues.", problemBody: "A missing towel, noisy air conditioner or slow response can become a one-star review when guests do not know who to tell.",
     benefits: [["Private first", "Feedback goes directly to your team—not to a public review site."], ["Act sooner", "Know what happened while there is still time to make it right."], ["Simple for guests", "No app, account or long form. Scan, select and send."]],
     story: { eyebrow: "A visible service loop", title: "From a quiet guest signal to an accountable response", items: [["Guest reports the issue", "A room-level QR gives the guest a discreet way to ask for help."], ["The right team is alerted", "Room, issue and urgency arrive together so staff can act without chasing context."], ["The hotel resolves and records it", "The response stays visible through completion and follow-up."]] },
     system: { eyebrow: "Complete operating loop", title: "More than a feedback form", body: "Every valid report becomes a trackable service-recovery task.", capabilities: [["Room-level web entry", "The QR opens a room-aware mobile web page."], ["Multiple input formats", "Guests can submit selections, text, voice, images or video."], ["Risk triage", "Category, urgency, sentiment, repeats and timeout risk are assessed."], ["Automatic work orders", "Room, issue, evidence, priority and suggested department stay together."], ["Mobile staff handling", "Teams accept, update and complete assigned tasks from mobile."], ["Manager oversight", "Managers see high-risk, overdue and reopened cases."], ["Closure and reporting", "Guest confirmation, observation, reopening and trend reports complete the loop."]] },
@@ -18,8 +18,8 @@ const feedbackCopy = {
     price: "Starting from $29 / room", final: "Give guests an easier way to speak up.", demo: "Get Guest Feedback QR", why: "Why it matters", how: "How it works", demoUi: { room: "Room 1208", question: "How can we help?", issue: "Room issue", housekeeping: "Housekeeping", other: "Something else", private: "Sent privately to the hotel team" },
   },
   ja: {
-    eyebrow: "滞在中サービスリカバリー", title: "困りごとを、滞在中に解決。", body: "客室QRから届いた内容を担当部署へ共有し、完了まで管理します。", cta: "導入について相談する", back: "サービス一覧",
-    problemTitle: "口コミになる前に、館内で対応。", problemBody: "滞在中に把握できれば、その場で案内や対応ができます。",
+    eyebrow: "ゲストフィードバックQR", title: "困りごとを、滞在中に解決。", body: "客室QRからスマートフォン用Webページを開き、届いた内容を判定して担当部署へ共有。対応状況を記録し、完了まで追跡します。アプリは不要です。", cta: "導入について相談する", back: "サービス一覧",
+    problemTitle: "口コミになる前に、館内で対応。", problemBody: "タオル不足、空調音、清掃の気になる点。滞在中に把握できれば、その場で案内や対応ができます。",
     benefits: [["施設へ直接届く", "投稿サイトを経由せず、内容と客室番号をスタッフが確認できます。"], ["チェックアウト前に対応", "滞在中に状況を把握できるため、その場での案内や対応が可能です。"], ["ゲストに負担をかけない", "アプリも会員登録も不要。読み取り、選択、送信だけで完了します。"]],
     story: { eyebrow: "対応の流れ", title: "小さな気づきを、確実な対応へ", items: [["ゲストが知らせる", "客室QRから、周囲を気にせず困りごとを送れます。"], ["担当スタッフへ届く", "客室・内容・緊急度がまとまり、必要な部署へ共有されます。"], ["対応して記録する", "対応状況と結果を残し、確認まで追跡します。"]] },
     system: { eyebrow: "対応を止めない仕組み", title: "ご意見を、対応につなげる", body: "届いた声を、担当者と期限のある対応タスクへ変えます。", capabilities: [["客室別Webページ", "QRを読み取ると、客室情報を引き継いだページが開きます。"], ["複数の入力方法", "選択肢・文章・音声・画像・動画で状況を伝えられます。"], ["リスク判定", "内容、緊急度、感情、再送、対応遅れの兆候を確認します。"], ["タスクの自動作成", "客室、内容、証拠、優先度、担当候補をまとめて共有します。"], ["スタッフのモバイル対応", "担当者が受付、着手、対応内容、完了を記録します。"], ["責任者の督促", "高リスク、期限超過、再開した案件を一覧で確認できます。"], ["確認とレポート", "ゲスト確認、再開、観察期間、傾向レポートまで管理します。"]] },
@@ -29,15 +29,15 @@ const feedbackCopy = {
     price: "1室 $29〜", final: "不満の声を、早めに拾える施設へ。", demo: "導入について相談する", why: "滞在中に声を拾う理由", how: "ご利用の流れ", demoUi: { room: "客室 1208", question: "お困りのことをお知らせください", issue: "客室設備について", housekeeping: "清掃・備品について", other: "その他のご相談", private: "内容は施設スタッフだけに届きます" },
   },
   zh: {
-    eyebrow: "住客反馈与服务跟进系统", title: "吐槽码", body: "住客扫码反馈，酒店接收、派单并跟进处理。", cta: "预约产品演示", back: "返回服务列表",
-    problemTitle: "能在店内解决，就别留到差评里", problemBody: "尽早知道房号和客诉内容，酒店才有时间补救。",
-    benefits: [["客诉直达酒店", "住客提交的内容只发给酒店工作人员，不会公开发布。"], ["趁住客还在店及时处理", "及时知道房号和不满事项，前台、客房或工程人员才能尽快跟进。"], ["住客扫码就能反馈", "不用下载应用，也不用注册账号，几步即可提交。"]],
-    story: { eyebrow: "看得见的处理过程", title: "从住客反馈，到酒店解决", items: [["住客扫码反馈", "不用打电话或下楼寻找前台，在房间里就能说明情况。"], ["客诉送达相关团队", "房号、问题和紧急程度一起送达，减少来回确认。"], ["现场处理并留下记录", "处理进度和结果全程可查，完成后继续回访住客。"]] },
+    eyebrow: "住客反馈二维码", title: "吐槽码", body: "住客扫描房间二维码进入反馈页面，可通过快捷选项、文字、语音、图片或视频提交客诉。系统识别风险后自动生成工单，让一线员工、经理和业主都能看到处理进展。", cta: "预约产品演示", back: "返回服务列表",
+    problemTitle: "别让客诉，变\u2060成\u2060差评", problemBody: "少一条毛巾、空调噪声太大、客房清洁不到位，往往都不难处理。真正麻烦的是酒店太晚知道，直到差评已经发到平台上。",
+    benefits: [["客诉直达酒店", "住客提交的内容只发给酒店工作人员，不会公开发布。"], ["在住宿期间及时处理", "及时知道房号和具体需求，前台、客房或工程人员才能尽快跟进。"], ["住客扫码就能反馈", "不用下载应用，也不用注册账号，几步即可提交。"]],
+    story: { eyebrow: "看得见的处理过程", title: "从住客反馈，到酒店解决", items: [["住客扫码反馈", "无需打电话或下楼寻找前台，在手机上就能说明情况。"], ["客诉送达相关团队", "房号、问题和紧急程度同时送达，缩短确认流程。"], ["现场处理并留下记录", "处理进度和结果全程可查，完成后继续回访住客。"]] },
     system: { eyebrow: "完整服务闭环", title: "不止是投\u2060诉\u2060箱", body: "每一条有效客诉都会进入可执行、可追踪、可督办的服务恢复流程。", capabilities: [["房间级微信小程序入口", "扫码自动带入酒店、楼层和房间信息。"], ["多种反馈方式", "支持快捷选项、文字、语音、图片和视频。"], ["智能风险识别", "识别问题类型、情绪强度、重复反馈和超时风险。"], ["自动生成酒店工单", "整合房号、客诉内容、材料、风险等级和建议部门。"], ["一线员工移动处理", "员工接单、开始处理、填写结果或重开工单。"], ["经理看板与督办", "集中查看高风险、超时、重开和部门处理压力。"], ["闭环确认与业主报告", "完成住客确认、观察期、日报月报和服务复盘。"]] },
     stepsTitle: "从住客扫码，到服务恢复闭环", steps: [["进入微信小程序", "扫描房间二维码，自动识别酒店、楼层和房号。"], ["提交客诉", "选择类型，并添加文字、语音、图片或视频。"], ["识别风险", "判断问题类型、风险等级和建议处理部门。"], ["自动生成工单", "将客诉推送给前台、客房或工程等相关团队。"], ["员工接单处理", "一线员工记录接单、处理中和完成情况。"], ["经理督办", "高风险、超时或重复客诉自动进入管理视线。"], ["住客确认并闭环", "解决后关闭；仍需帮助则重开并继续跟进。"]],
-    roles: { eyebrow: "一套系统，四种视角", title: "一条客诉，各司其职", items: [["对住客", "不用寻找投诉渠道，扫码即可把不满直接告诉酒店。"], ["对一线团队", "每项任务都有房间、类型、负责人、状态和处理记录。"], ["对管理层", "集中查看高风险房间、超时工单、重复客诉和部门压力。"], ["对酒店业主", "通过响应时间、风险趋势和处理结果判断服务恢复是否有效。"]] },
+    roles: { eyebrow: "一套系统，四种视角", title: "一条客诉，各司其职", items: [["对住客", "不用寻找投诉渠道，扫码即可让需求直达酒店。"], ["对一线团队", "每项任务都有房间、类型、负责人、状态和处理记录。"], ["对管理层", "集中查看高风险房间、超时工单、重复客诉和部门压力。"], ["对酒店业主", "通过响应时间、风险趋势和处理结果判断服务恢复是否有效。"]] },
     example: { eyebrow: "场景示例", title: "一条客诉，退\u2060房\u2060前完成处理", note: "以下为产品使用示例，用于说明处理流程，不代表真实客户数据。", event: "房间1208 · 空调噪声", timeline: [["22:14", "住客扫码提交", "住客反馈空调运行噪声较大，已经影响休息。"], ["22:15", "前台收到提醒", "房号、客诉类型和具体内容同时发送给酒店。"], ["22:20", "工程人员联系住客", "确认方便上门检查的时间，并开始跟进。"], ["22:42", "处理后再次回访", "工作人员记录处理结果，并向住客确认当前情况。"]], resultTitle: "酒店得到什么", results: ["客诉内容和处理记录更清楚", "前台与相关部门更早知道", "住客退房前仍有补救机会"] },
-    price: "$29 / 间起", final: "让每条反馈得到及时跟进", demo: "申请产品演示", why: "为什么要及时接收反馈", how: "反馈处理流程", demoUi: { room: "房间 1208", question: "本次入住有哪些需要协助？", issue: "客房设施", housekeeping: "卫生与清洁", other: "其他反馈", private: "仅酒店工作人员可见" },
+    price: "$29 / 间起", final: "别让需求变成差评", demo: "申请产品演示", why: "为什么要提前接住客诉", how: "客诉处理流程", demoUi: { room: "房间 1208", question: "您对本次入住哪里不满意？", issue: "客房设施", housekeeping: "卫生与清洁", other: "其他客诉", private: "仅酒店工作人员可见" },
   },
 } as const;
 

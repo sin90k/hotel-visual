@@ -6,8 +6,8 @@ const en = {
   nav: { services: "Services", examples: "Examples", process: "Process", cases: "Case Studies", contact: "Contact" },
   hero: {
     eyebrow: "Room Photo Enhancement",
-    title: "Room Photos That Sell the Stay",
-    body: "Refine existing photos for clearer OTA presentation.",
+    title: "Turn Better Room Photos Into More Bookings",
+    body: "We help hotels and vacation rentals improve booking performance through stronger room photography and better OTA presentation.",
     primary: "Get Free Property Review",
     secondary: "View Examples",
     trust: "Free review. No commitment required.",
@@ -42,7 +42,7 @@ export type Copy = typeof en;
 const ja: Copy = {
   ...en,
   nav: { services: "サービス内容", examples: "改善事例", process: "ご利用の流れ", cases: "活用イメージ", contact: "無料診断" },
-  hero: { eyebrow: "客室写真の見せ方改善", title: "客室写真を、予約につながる見せ方へ。", body: "既存写真を整え、客室の魅力を予約サイトで伝わりやすくします。", primary: "無料診断を申し込む", secondary: "改善事例を見る", trust: "相談は無料です。依頼を前提としたものではありません。" },
+  hero: { eyebrow: "客室写真の見せ方改善", title: "その客室の良さ、写真で伝わっていますか。", body: "今ある客室写真と予約サイトでの見え方を整え、広さ・明るさ・過ごしやすさが、予約前のゲストに伝わる状態をつくります。", primary: "無料診断を申し込む", secondary: "改善事例を見る", trust: "相談は無料です。依頼を前提としたものではありません。" },
   system: { review: "掲載ページ診断", analysis: "担当者が確認中", tags: ["明るさ", "構図", "伝わりやすさ"], metrics: [["主写真の見え方", "要改善"], ["客室の魅力", "改善余地"], ["情報の分かりやすさ", "確認済み"]] },
   proof: { label: "写真と掲載ページを確認", one: "担当者が一件ずつ診断", two: "優先すべき改善点を整理", three: "予約サイトでの見え方を重視" },
   difference: { eyebrow: "同じ客室で比較", title: "写真の見せ方で、印象はここまで変わります。", body: "同じ客室・同じアングルのまま、明るさや色、奥行きの伝わり方を整えています。", before: "改善前", after: "改善後", items: ["客室写真の見せ方改善", "スイート客室の改装イメージ", "ヴィラの魅力訴求"] },
@@ -59,17 +59,17 @@ const ja: Copy = {
 const zh: Copy = {
   ...en,
   nav: { services: "服务内容", examples: "优化案例", process: "合作流程", cases: "能改善什么", contact: "免费评估" },
-  hero: { eyebrow: "酒店客房图片优化", title: "让客房照片更有说服力", body: "优化现有照片与OTA主图，让客房优势更清楚。", primary: "获取免费评估", secondary: "查看优化案例", trust: "免费评估，不要求后续合作。" },
+  hero: { eyebrow: "酒店客房图片优化", title: "让客人第一眼看\u2060见房\u2060间\u2060的\u2060价\u2060值", body: "优化现有客房照片与OTA页面的展示方式，让酒店和民宿的真实优势更容易被潜在客人看见。", primary: "获取免费评估", secondary: "查看优化案例", trust: "免费评估，无需后续合作。" },
   system: { review: "房源展示检查", analysis: "人工审核中", tags: ["光线", "构图", "价值呈现"], metrics: [["OTA主图", "建议优化"], ["客房质感", "有提升空间"], ["信息清晰度", "已检查"]] },
   proof: { label: "照片与OTA页面诊断", one: "由团队人工审核", two: "找出优先改善项", three: "重点检查实际展示效果" },
   difference: { eyebrow: "优化前后", title: "前后效果，一目了然", body: "拖动滑块，比较同一个房间优化前后的实际变化。", before: "优化前", after: "优化后", items: ["客房照片优化", "套房升级预览", "别墅视觉呈现优化"] },
-  why: { ...en.why, eyebrow: "影响客人下单的第一印象", title: "客人先看照片，再\u2060决\u2060定\u2060要\u2060不\u2060要\u2060订", body: "在OTA列表页里，客人通常只会用几秒钟筛选房源。主图能不能抓住注意力，客房优势能不能一眼看懂，都会影响后续下单。", cards: [["房源更容易被点开", "主图在同类房源里更醒目，客人才愿意继续看详情。"], ["客人下单更有底", "采光、空间和设施展示清楚，可以减少预订前的犹豫。"], ["房价更有说服力", "照片把客房档次和细节展示到位，价格也更容易被认可。"]] },
+  why: { ...en.why, eyebrow: "影响转化率的第一印象", title: "照片抓住眼球，才\u2060有\u2060订\u2060单\u2060产\u2060生", body: "在OTA列表页里，客人通常只会用几秒钟筛选图片。主图能不能抓住注意力，客房优势能不能一眼看懂，都会影响后续下单。", cards: [["提高房源点击率", "主图在同类房源里更醒目，客人才愿意继续点击详情。"], ["客人下单更有底", "采光、空间和设施展示清楚，减少预订前的犹豫。"], ["房价更有说服力", "照片把客房档次和细节展示到位，价格也更容易被认可。"]] },
   optimize: { eyebrow: "优化内容", title: "我们优化什么？", items: ["光线优化", "色彩统一", "空间感增强", "床品质感提升", "OTA主图优化"] },
   services: { ...en.services, eyebrow: "核心服务", title: "先把现\u2060有\u2060照\u2060片的价值发\u2060挥\u2060出\u2060来", items: [["01", "客房照片优化", "无需重新拍摄。我们会适度调整光线、色彩和空间层次，在保持真实感的前提下，让照片更适合携程、Airbnb、Booking.com等平台展示。", "¥100 起"], ["02", "客房升级预览", "投入装修预算前，先直观看到家具、材质和空间调整后的呈现效果。", "¥200 起"]] },
-  process: { ...en.process, eyebrow: "合作流程", title: "提交房源链接，先看看哪里最值得改善", support: "看完具体建议后，再决定是否需要继续合作。", steps: [["提交房源", "提供酒店官网或Booking.com、Airbnb房源链接。"], ["人工审核", "团队逐项检查照片、排序和OTA页面中的实际展示效\u2060果。"], ["收到建议", "获得3项优先优化建议和1张免费样图。"], ["决定是否继续", "评估本身不绑定后续服务。"]] },
-  cases: { eyebrow: "OTA展示评估标准", title: "一张图片是否适合卖房，我们看这四点", note: "不重复展示案例，也不虚构点击率或订单增长数据。这里说明我们实际检查什么。", outcomes: [["列表页是否醒目", "缩成OTA主图尺寸后，客房特点还能不能一眼看清。"], ["空间是否好理解", "采光、布局和实际可用空间是否表达清楚。"], ["质感是否真实", "床品、材质与装修细节是否自然、干净、有说服力。"], ["能否想象入住", "整组照片是否能让客人理解住进去是什么感觉。"]], impact: "主要改善", mainLabel: "客房照片优化", mainTitle: "让客人在预订前，就看清房间的优势", main: "把采光、空间和细节展示清楚，让客人不用猜照片里到底是什么样。", secondaryLabel: "升级预览", secondary: "装修投入前，先确认家具、材质和布局调整是否合适。", thirdLabel: "别墅主图优化", thirdTitle: "不只拍房间，也要拍出住进去的感觉", third: "把室内、景观和生活场景串起来，让客人更容易想象完整的入住体验。", privateWindow: "房源页面检查" },
+  process: { ...en.process, eyebrow: "合作流程", title: "提交房源链接，免费获取优化方案", support: "看完具体建议后，再决定是否需要合作。", steps: [["提交房源", "提供酒店官网或Booking.com、Airbnb房源链接。"], ["人工审核", "团队逐项检查照片、排序和OTA页面中的实际展示效\u2060果。"], ["收到建议", "获得3项优先优化建议和1张免费样图。"], ["决定是否继续", "评估本身不绑定后续服务。"]] },
+  cases: { eyebrow: "OTA展示评估标准", title: "一张图片是否适合卖房，我们看这四点", note: "不重复展示案例，也不虚构点击率或订单增长数据。这里说明我们实际检查什么。", outcomes: [["列表页是否醒目", "缩成OTA主图尺寸后，客房特点还能不能一眼看清。"], ["空间是否好理解", "采光、布局和实际可用空间是否表达清楚。"], ["质感是否真实", "床品、材质与装修细节是否自然、干净、有说服力。"], ["能否想象入住体验", "整组照片是否能让客人理解住进去是什么感觉。"]], impact: "主要改善", mainLabel: "客房照片优化", mainTitle: "让客人在预订前，就看清房间的优势", main: "把采光、空间和细节展示清楚，让客人不用猜照片里到底是什么样。", secondaryLabel: "升级预览", secondary: "装修投入前，先确认家具、材质和布局调整是否合适。", thirdLabel: "别墅主图优化", thirdTitle: "不只拍房间，也要拍出住进去的感觉", third: "把室内、景观和生活场景串起来，让客人更容易想象完整的入住体验。", privateWindow: "房源页面检查" },
   trustSection: { eyebrow: "先把房间讲清楚", title: "照片越真实清楚，客人下单越\u2060放\u2060心", body: "采光、布局、床品和设施都展示到位，客人才知道自己订的是什么。我们不会用过度滤镜把房间修得失真，而是把原本就有的优势拍明白、讲清楚。" },
-  review: { ...en.review, eyebrow: "免费评估", title: "发来酒店链接，免\u2060费\u2060帮\u2060您\u2060看\u2060一\u2060遍", body: "我们会人工检查客房图片、主图排序和OTA页面里的实际展示效\u2060果。", includes: ["3项优先优化建议", "1张免费优化样图", "OTA页面展示检查"], fields: ["酒店或民宿名称", "官方网站", "Booking.com链接", "Airbnb链接", "联系邮箱", "WhatsApp", "想重点改善的内容"], messagePlaceholder: "可以告诉我们目前最想改善哪类客房或哪组图片。", consent: "提交后，我们只会就本次免费评估与您联系。", submit: "提交免费评估", sending: "正在提交…", success: "提交成功", successBody: "我们已收到房源信息。完成检查后，工作人员会与您联系。", again: "评估另一家房源", error: "暂时没有提交成功，请稍后再试。" },
+  review: { ...en.review, eyebrow: "免费评估", title: "提交酒店链接，获取免费评估", body: "我们会人工检查客房图片、主图排序和OTA页面里的实际展示效\u2060果。", includes: ["3项优先优化建议", "1张免费优化样图", "OTA页面展示检查"], fields: ["酒店或民宿名称", "官方网站", "Booking.com链接", "Airbnb链接", "联系邮箱", "WhatsApp", "想重点改善的内容"], messagePlaceholder: "可以告诉我们目前最想改善哪类客房或哪组图片。", consent: "提交后，我们只会就本次免费评估与您联系。", submit: "提交免费评估", sending: "正在提交…", success: "提交成功", successBody: "我们已收到房源信息。完成检查后，工作人员会与您联系。", again: "评估另一家房源", error: "暂时没有提交成功，请稍后再试。" },
   contact: { eyebrow: "联系我们", title: "别让好房间输在照片上", location: "服务酒店、民宿与度假租赁房源", button: "聊聊您的房源" },
 };
 

@@ -6,13 +6,13 @@ const en = {
   nav: { services: "Services", examples: "Examples", process: "Process", cases: "Case Studies", contact: "Contact" },
   hero: {
     eyebrow: "Room Photo Enhancement",
-    title: "Turn Better Room Photos Into More Bookings",
-    body: "We help hotels and vacation rentals improve booking performance through stronger room photography and better OTA presentation.",
+    title: "Room Photos That Sell the Stay",
+    body: "Refine existing photos for clearer OTA presentation.",
     primary: "Get Free Property Review",
     secondary: "View Examples",
     trust: "Free review. No commitment required.",
   },
-  system: { review: "Property review", analysis: "Manual analysis", tags: ["Light", "Styling", "Value"], metrics: [["Listing clarity", "+32%"], ["Perceived value", "+24%"], ["Visual confidence", "High"]] },
+  system: { review: "Property review", analysis: "Manual analysis", tags: ["Light", "Styling", "Value"], metrics: [["Listing clarity", "Review"], ["Room value", "Improve"], ["Visual confidence", "Checked"]] },
   proof: { label: "Presentation performance", one: "Manual property review", two: "Visual opportunities identified", three: "Business impact prioritized" },
   difference: { eyebrow: "Before and after", title: "See the Difference", body: "Drag the slider to compare the same room before and after our work.", before: "Before", after: "After", items: ["Room Photo Enhancement", "Suite Upgrade Preview", "Villa Presentation Enhancement"] },
   why: { eyebrow: "Booking performance", title: "Why photos affect bookings", body: "Guests make fast decisions on OTA listing pages. Stronger room photos make more people stop, click and feel confident about the price.", cards: [
@@ -42,7 +42,7 @@ export type Copy = typeof en;
 const ja: Copy = {
   ...en,
   nav: { services: "サービス内容", examples: "改善事例", process: "ご利用の流れ", cases: "活用イメージ", contact: "無料診断" },
-  hero: { eyebrow: "客室写真の見せ方改善", title: "その客室の良さ、写真で伝わっていますか。", body: "今ある客室写真と予約サイトでの見え方を整え、広さ・明るさ・過ごしやすさが、予約前のゲストに伝わる状態をつくります。", primary: "無料診断を申し込む", secondary: "改善事例を見る", trust: "相談は無料です。依頼を前提としたものではありません。" },
+  hero: { eyebrow: "客室写真の見せ方改善", title: "客室写真を、予約につながる見せ方へ。", body: "既存写真を整え、客室の魅力を予約サイトで伝わりやすくします。", primary: "無料診断を申し込む", secondary: "改善事例を見る", trust: "相談は無料です。依頼を前提としたものではありません。" },
   system: { review: "掲載ページ診断", analysis: "担当者が確認中", tags: ["明るさ", "構図", "伝わりやすさ"], metrics: [["主写真の見え方", "要改善"], ["客室の魅力", "改善余地"], ["情報の分かりやすさ", "確認済み"]] },
   proof: { label: "写真と掲載ページを確認", one: "担当者が一件ずつ診断", two: "優先すべき改善点を整理", three: "予約サイトでの見え方を重視" },
   difference: { eyebrow: "同じ客室で比較", title: "写真の見せ方で、印象はここまで変わります。", body: "同じ客室・同じアングルのまま、明るさや色、奥行きの伝わり方を整えています。", before: "改善前", after: "改善後", items: ["客室写真の見せ方改善", "スイート客室の改装イメージ", "ヴィラの魅力訴求"] },
@@ -59,7 +59,7 @@ const ja: Copy = {
 const zh: Copy = {
   ...en,
   nav: { services: "服务内容", examples: "优化案例", process: "合作流程", cases: "能改善什么", contact: "免费评估" },
-  hero: { eyebrow: "酒店客房图片优化", title: "让客人第一眼看\u2060见房\u2060间\u2060的\u2060价\u2060值", body: "优化现有客房照片与OTA页面的展示方式，让酒店和民宿的真实优势更容易被潜在客人看见。", primary: "获取免费评估", secondary: "查看优化案例", trust: "免费评估，不要求后续合作。" },
+  hero: { eyebrow: "酒店客房图片优化", title: "让客房照片更有说服力", body: "优化现有照片与OTA主图，让客房优势更清楚。", primary: "获取免费评估", secondary: "查看优化案例", trust: "免费评估，不要求后续合作。" },
   system: { review: "房源展示检查", analysis: "人工审核中", tags: ["光线", "构图", "价值呈现"], metrics: [["OTA主图", "建议优化"], ["客房质感", "有提升空间"], ["信息清晰度", "已检查"]] },
   proof: { label: "照片与OTA页面诊断", one: "由团队人工审核", two: "找出优先改善项", three: "重点检查实际展示效果" },
   difference: { eyebrow: "优化前后", title: "前后效果，一目了然", body: "拖动滑块，比较同一个房间优化前后的实际变化。", before: "优化前", after: "优化后", items: ["客房照片优化", "套房升级预览", "别墅视觉呈现优化"] },

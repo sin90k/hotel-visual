@@ -3,19 +3,23 @@ import "./globals.css";
 import { LocaleProvider } from "@/components/locale-provider";
 
 export const metadata: Metadata = {
-  title: "Otter Visual｜让房间价值被看见",
+  title: "Otter Stay｜海獭住伴",
   description:
-    "Hospitality visual optimization for hotels, vacation rentals and property managers. Improve room presentation and booking performance.",
+    "Otter Stay helps hotels and vacation rentals improve room presentation, guest feedback and service recovery.",
   keywords: [
     "hotel photography",
     "room photo enhancement",
     "OTA optimization",
+    "guest feedback QR",
     "vacation rental marketing",
-    "hotel booking performance",
+    "hotel operations",
   ],
+  icons: {
+    icon: "/brand/otter-stay/otter-stay-selected-icon.png",
+  },
   openGraph: {
-    title: "Otter Visual — Turn Better Room Photos Into More Bookings",
-    description: "A hospitality growth partner for stronger room presentation and booking performance.",
+    title: "Otter Stay — Together through every stay",
+    description: "A hospitality partner for better room presentation and smoother guest feedback.",
     type: "website",
   },
 };

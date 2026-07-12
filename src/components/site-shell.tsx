@@ -10,7 +10,7 @@ import { useLocale } from "@/components/locale-provider";
 
 const shellCopy = {
   en: { home: "Home", photo: "Photo Enhancement", feedback: "Service Recovery", contact: "Free Assessment", descriptor: "Together through every stay", copyright: "All rights reserved." },
-  ja: { home: "ホーム", photo: "客室写真の見せ方改善", feedback: "サービスリカバリー", contact: "無料診断", descriptor: "すべての滞在に、寄り添う。", copyright: "無断転載を禁じます。" },
+  ja: { home: "ホーム", photo: "写真・予約ページ改善", feedback: "サービスリカバリー", contact: "無料診断", descriptor: "すべての滞在に、寄り添う。", copyright: "無断転載を禁じます。" },
   zh: { home: "首页", photo: "客房图片优化", feedback: "吐槽码", contact: "免费评估", descriptor: "一起守住每一次入住体验", copyright: "版权所有。" },
 } as const;
 
@@ -24,7 +24,7 @@ export function SiteHeader() {
   return <header className="unified-header">
     <Link href="/" className="brand brand-with-mark">
       <Image src="/brand/otter-stay/otter-stay-selected-icon.png" alt="" aria-hidden="true" width={46} height={46} priority />
-      <span className="brand-text"><strong>Otter Stay</strong><span>{copy.descriptor}</span></span>
+      <span className="brand-text"><strong>Rakko Stay</strong><span>{copy.descriptor}</span></span>
     </Link>
     <nav className={menuOpen ? "open" : ""}>
       {links.map(([href, label]) => <Link key={href} className={pathname === href ? "active" : ""} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>)}
@@ -43,9 +43,9 @@ export function SiteFooter() {
   return <footer className="unified-footer">
     <div className="footer-brand-lockup">
       <Image src="/brand/otter-stay/otter-stay-selected-icon.png" alt="" aria-hidden="true" width={58} height={58} />
-      <span><strong>Otter Stay</strong><span>{copy.descriptor}</span></span>
+      <span><strong>Rakko Stay</strong><span>{copy.descriptor}</span></span>
     </div>
     <nav><Link href="/products/photo-enhancement">{copy.photo}</Link><Link href="/products/guest-feedback">{copy.feedback}</Link><a href="mailto:hello@ottervisual.com">hello@ottervisual.com</a></nav>
-    <p>© {new Date().getFullYear()} Otter Stay. {copy.copyright}</p>
+    <p>© {new Date().getFullYear()} Rakko Stay. {copy.copyright}</p>
   </footer>;
 }

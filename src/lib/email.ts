@@ -6,6 +6,6 @@ export function confirmationEmail(propertyName: string) {
     <p>You will receive:</p>
     <p>✓ 3 room photo improvement recommendations<br/>✓ 1 complimentary visual sample</p>
     <p>We will contact you after the review is completed.</p>
-    <p>Otter Visual</p>
+    <p>Rakko Stay</p>
   `;
 }

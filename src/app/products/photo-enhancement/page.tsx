@@ -80,14 +80,14 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
   return (
     <form className="review-form" onSubmit={submit}>
       <div className="form-grid">
-        {copy.fields.slice(0, 6).map((field, index) => (
+        {copy.fields.slice(0, 4).map((field, index) => (
           <label key={field}>
-            <span>{field}{[0, 4].includes(index) ? " *" : ""}</span>
-            <input name={["propertyName", "websiteUrl", "bookingUrl", "airbnbUrl", "email", "whatsapp"][index]} type={index === 4 ? "email" : index > 0 && index < 4 ? "url" : "text"} required={[0, 4].includes(index)} placeholder={index === 0 ? (locale === "ja" ? "例：ホテル青葉" : locale === "zh" ? "例如：青岚酒店" : "The Willow House") : index === 4 ? "name@example.com" : index === 5 ? "+81 90 0000 0000" : "https://"} />
+            <span>{field}{[0, 2].includes(index) ? " *" : ""}</span>
+            <input name={["propertyName", "websiteUrl", "email", "whatsapp"][index]} type={index === 1 ? "url" : index === 2 ? "email" : "text"} required={[0, 2].includes(index)} placeholder={index === 0 ? (locale === "ja" ? "例：ホテル青葉" : locale === "zh" ? "例如：青岚酒店" : "The Willow House") : index === 1 ? "https://" : index === 2 ? "name@example.com" : "+81 90 0000 0000"} />
           </label>
         ))}
       </div>
-      <label className="message-field"><span>{copy.fields[6]}</span><textarea name="message" rows={4} placeholder={copy.messagePlaceholder} /></label>
+      <label className="message-field"><span>{copy.fields[4]}</span><textarea name="message" rows={4} placeholder={copy.messagePlaceholder} /></label>
       <div className="form-footer">
         <p>{copy.consent}</p>
         <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>
@@ -145,6 +145,20 @@ export default function Home() {
       <section className="section services-section" id="services">
         <Reveal className="services-title"><p className="eyebrow light"><span />{copy.services.eyebrow}</p><h2>{copy.services.title}</h2></Reveal>
         <div className="service-list">{copy.services.items.map(([num, title, body, price], i) => <Reveal key={title} className={`service-row ${i === 0 ? "primary-service" : ""}`}><span className="service-num">{num}</span><div><h3>{title}</h3><p>{body}</p></div><strong>{price}</strong><ArrowDownRight /></Reveal>)}</div>
+      </section>
+
+      <section className="section cost-section">
+        <Reveal className="section-intro split-intro">
+          <div><p className="eyebrow"><span />{copy.costBenefit.eyebrow}</p><h2>{copy.costBenefit.title}</h2></div>
+          <p>{copy.costBenefit.body}</p>
+        </Reveal>
+        <div className="cost-grid">
+          {copy.costBenefit.cards.map(([title, body], index) => {
+            const Icon = [Gauge, Sparkles, Check][index];
+            return <Reveal className={`cost-card ${index === 1 ? "cost-card-featured" : ""}`} key={title}><span>0{index + 1}</span><Icon /><h3>{title}</h3><p>{body}</p></Reveal>;
+          })}
+        </div>
+        <Reveal className="cost-note"><Check size={16} />{copy.costBenefit.note}</Reveal>
       </section>
 
       <section className="section process-section" id="process">

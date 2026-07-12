@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   // Placeholder integration point for Resend:
   // const resend = getResend();
   // await resend.emails.send({
-  //   from: "Otter Visual <reviews@ottervisual.com>",
+  //   from: "Rakko Stay <reviews@ottervisual.com>",
   //   to: email,
   //   subject: "Property Review Request Received",
   //   html: confirmationEmail(propertyName),

@@ -322,6 +322,11 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
 .field-error { color:#b55342; font-size:12px; line-height:1.45; font-weight:600; letter-spacing:0; text-transform:none; }
 .home-review input { border-bottom:1px solid transparent; padding-bottom:5px; }
 .home-review input[aria-invalid="true"] { border-bottom-color:#b55342; }
+.file-field { position:relative; }
+.file-field input[type="file"] { width:100%; border:1px dashed #b9ccd0; padding:15px; background:#f7fbfb; color:var(--ink); cursor:pointer; }
+.file-field input[type="file"]::file-selector-button { margin-right:14px; border:0; background:var(--ocean); color:#fff; padding:9px 13px; font-weight:700; cursor:pointer; }
+.file-field em { color:#7f8a8c; font-size:12px; line-height:1.5; font-style:normal; }
+.home-review .file-field input[type="file"] { border-color:#c6d8db; padding:14px; background:#f7fbfb; font-size:14px; }
 .home-success { min-height:440px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .home-success>svg { width:52px; height:52px; padding:14px; border-radius:50%; background:#e8efe7; color:var(--success); }
 .home-success h3 { margin:24px 0 12px; font:400 38px var(--font-serif); }

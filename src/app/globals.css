@@ -318,6 +318,10 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
 .home-review input:focus,.home-review textarea:focus { border-color:transparent; }
 .home-review .wide,.home-review form>button { grid-column:1/-1; }
 .home-review form>button { justify-self:start; margin-top:8px; font-size:15px; box-shadow:0 14px 30px rgba(111,78,34,.18); }
+.review-form input[aria-invalid="true"],.home-review input[aria-invalid="true"] { border-color:#b55342; }
+.field-error { color:#b55342; font-size:12px; line-height:1.45; font-weight:600; letter-spacing:0; text-transform:none; }
+.home-review input { border-bottom:1px solid transparent; padding-bottom:5px; }
+.home-review input[aria-invalid="true"] { border-bottom-color:#b55342; }
 .home-success { min-height:440px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .home-success>svg { width:52px; height:52px; padding:14px; border-radius:50%; background:#e8efe7; color:var(--success); }
 .home-success h3 { margin:24px 0 12px; font:400 38px var(--font-serif); }

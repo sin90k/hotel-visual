@@ -47,18 +47,41 @@ function BeforeAfter({ before, after, beforeLabel, afterLabel }: { before: strin
   return <div className="home-compare"><div className="home-photo" style={{ backgroundImage: `url(${before})` }} /><div className="home-photo" style={{ backgroundImage: `url(${after})`, clipPath: `inset(0 0 0 ${position}%)` }} /><span className="home-before">{beforeLabel}</span><span className="home-after">{afterLabel}</span><i style={{ left: `${position}%` }} /><b style={{ left: `${Math.min(97, Math.max(3, position))}%` }}>‹ ›</b><input aria-label="Before after comparison" type="range" min="0" max="100" value={position} onChange={(event) => setPosition(Number(event.target.value))} /></div>;
 }
 
+const formFieldNames = ["propertyName", "websiteUrl", "email", "whatsapp"] as const;
+const requiredReviewFields = new Set(["propertyName", "websiteUrl", "email"]);
+
 export default function HomePage() {
   const { locale } = useLocale();
   const c = copy[locale];
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success">("idle");
-  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); setFormStatus("sending"); const response = await fetch("/api/review", { method: "POST", body: new FormData(event.currentTarget) }); if (response.ok) setFormStatus("success"); else setFormStatus("idle"); }
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const validationCopy = {
+    en: { required: (field: string) => `Please enter ${field}.`, url: "Please enter a valid property or OTA URL.", email: "Please enter a valid email address." },
+    ja: { required: (field: string) => `${field}を入力してください。`, url: "施設またはOTAページのURLを正しく入力してください。", email: "メールアドレスを正しく入力してください。" },
+    zh: { required: (field: string) => `请填写${field}。`, url: "请填写有效的房源或OTA链接。", email: "请填写有效的邮箱地址。" },
+  }[locale];
+  function validate(form: HTMLFormElement) {
+    const nextErrors: Record<string, string> = {};
+    const formData = new FormData(form);
+    formFieldNames.forEach((name, index) => {
+      const value = String(formData.get(name) || "").trim();
+      if (requiredReviewFields.has(name) && !value) nextErrors[name] = validationCopy.required(c.review.fields[index]);
+    });
+    const url = String(formData.get("websiteUrl") || "").trim();
+    if (url && !/^https?:\/\/.+\..+/.test(url)) nextErrors.websiteUrl = validationCopy.url;
+    const email = String(formData.get("email") || "").trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = validationCopy.email;
+    setFormErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  }
+  async function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); if (!validate(event.currentTarget)) return; setFormStatus("sending"); const response = await fetch("/api/review", { method: "POST", body: new FormData(event.currentTarget) }); if (response.ok) setFormStatus("success"); else setFormStatus("idle"); }
   return <main className="marketing-home">
     <SiteHeader />
     <section className="home-hero"><div><p className="eyebrow"><span />{c.hero.eyebrow}</p><h1>{c.hero.title}</h1><p>{c.hero.body}</p><div><a className="button button-dark" href="#review">{c.hero.primary}<ArrowRight /></a><a className="text-button" href="#cases">{c.hero.secondary}</a></div></div><BeforeAfter before={caseImages[0].before} after={caseImages[0].after} beforeLabel={c.cases.before} afterLabel={c.cases.after} /></section>
     <section className="home-why"><div className="home-section-heading"><h2>{c.why.title}</h2><p>{c.why.body}</p></div><div>{c.why.cards.map(([title, body], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div></section>
     <section className="home-products"><h2>{c.products.title}</h2><div className="home-product-grid"><article className="home-photo-product"><div className="home-product-copy"><span>{c.products.photo.label}</span><h3>{c.products.photo.title}</h3><p>{c.products.photo.body}</p><ul>{c.products.photo.bullets.map(item => <li key={item}><Check />{item}</li>)}</ul><Link href="/products/photo-enhancement">{c.products.photo.cta}<ArrowRight /></Link></div><div className="product-photo-preview"><div style={{backgroundImage:`url(${caseImages[0].before})`}}><span>{c.cases.before}</span></div><div style={{backgroundImage:`url(${caseImages[0].after})`}}><span>{c.cases.after}</span></div><i /></div></article><article className="home-feedback-product"><QrCode /><span>{c.products.feedback.label}</span><h3>{c.products.feedback.title}</h3><p>{c.products.feedback.body}</p><ul>{c.products.feedback.bullets.map(item => <li key={item}><Check />{item}</li>)}</ul><div className="feedback-mini-case"><small>{c.products.feedback.example.label}</small><div><b>{c.products.feedback.example.room}</b><span>{c.products.feedback.example.title}</span></div><p><Check />{c.products.feedback.example.status}</p></div><Link href="/products/guest-feedback">{c.products.feedback.cta}<ArrowRight /></Link></article></div></section>
     <section className="home-cases" id="cases"><div className="home-section-heading"><h2>{c.cases.title}</h2><p>{c.cases.body}</p></div>{caseImages.map((images, index) => <article className="home-case" key={images.after}><div><span>0{index + 1}</span><h3>{c.cases.labels[index]}</h3></div><BeforeAfter before={images.before} after={images.after} beforeLabel={c.cases.before} afterLabel={c.cases.after} /><aside><strong>{c.cases.summary}</strong>{c.cases.summaries[index].map(item => <p key={item}><Check />{item}</p>)}</aside></article>)}</section>
-    <section className="home-review" id="review"><div><h2>{c.review.title}</h2><p>{c.review.body}</p><ul>{c.review.includes.map(item => <li key={item}><Check />{item}</li>)}</ul></div>{formStatus === "success" ? <div className="home-success"><Check /><h3>{c.review.success}</h3><p>{c.review.successBody}</p></div> : <form onSubmit={submit}>{c.review.fields.slice(0,4).map((field,index)=><label key={field}><span>{field}</span><input name={["propertyName","websiteUrl","email","whatsapp"][index]} type={index===1?"url":index===2?"email":"text"} required={index===0||index===2} /></label>)}<label className="wide"><span>{c.review.fields[4]}</span><textarea name="message" rows={3} /></label><button className="button button-gold" type="submit">{formStatus === "sending" ? c.review.sending : c.review.button}<ArrowRight /></button></form>}</section>
+    <section className="home-review" id="review"><div><h2>{c.review.title}</h2><p>{c.review.body}</p><ul>{c.review.includes.map(item => <li key={item}><Check />{item}</li>)}</ul></div>{formStatus === "success" ? <div className="home-success"><Check /><h3>{c.review.success}</h3><p>{c.review.successBody}</p></div> : <form onSubmit={submit} noValidate>{c.review.fields.slice(0,4).map((field,index)=>{ const fieldName = formFieldNames[index]; return <label key={field}><span>{field}{requiredReviewFields.has(fieldName) ? " *" : ""}</span><input name={fieldName} type={index===1?"url":index===2?"email":"text"} aria-invalid={Boolean(formErrors[fieldName])} placeholder={index===0 ? (locale==="ja" ? "例：ホテル青葉" : locale==="zh" ? "例如：青岚酒店" : "The Willow House") : index===1 ? "https://example.com" : index===2 ? "name@example.com" : "+81 90 0000 0000"} onChange={() => formErrors[fieldName] && setFormErrors((current) => ({ ...current, [fieldName]: "" }))} />{formErrors[fieldName] && <small className="field-error">{formErrors[fieldName]}</small>}</label>;})}<label className="wide"><span>{c.review.fields[4]}</span><textarea name="message" rows={3} placeholder={locale==="ja" ? "気になっている写真や客室があればお聞かせください。" : locale==="zh" ? "可以告诉我们目前最想改善哪类客房或哪组图片。" : "Tell us what you would like to improve."} /></label><button className="button button-gold" type="submit">{formStatus === "sending" ? c.review.sending : c.review.button}<ArrowRight /></button></form>}</section>
     <section className="home-feedback"><div><p className="eyebrow"><span />{c.products.feedback.title}</p><h2>{c.feedback.title}</h2><p>{c.feedback.body}</p></div><div>{c.feedback.steps.map((step,index)=><div key={step}><span>0{index+1}</span><strong>{step}</strong>{index<c.feedback.steps.length-1&&<ArrowDown />}</div>)}</div></section>
     <section className="home-final"><h2>{c.final.title}</h2><p>{c.final.body}</p><a className="button button-gold" href="#review">{c.final.button}<ArrowRight /></a></section>
     <SiteFooter />

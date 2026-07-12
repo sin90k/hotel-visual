@@ -61,8 +61,33 @@ function Comparison({ title, beforeImage, afterImage, beforeFilter, before, afte
 
 function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["review"]; locale: "en" | "ja" | "zh" }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const fieldNames = ["propertyName", "websiteUrl", "email", "whatsapp"] as const;
+  const requiredFields = new Set(["propertyName", "websiteUrl", "email"]);
+  const validationCopy = {
+    en: { required: (field: string) => `Please enter ${field}.`, url: "Please enter a valid property or OTA URL.", email: "Please enter a valid email address." },
+    ja: { required: (field: string) => `${field}を入力してください。`, url: "施設またはOTAページのURLを正しく入力してください。", email: "メールアドレスを正しく入力してください。" },
+    zh: { required: (field: string) => `请填写${field}。`, url: "请填写有效的房源或OTA链接。", email: "请填写有效的邮箱地址。" },
+  }[locale];
+
+  function validate(form: HTMLFormElement) {
+    const nextErrors: Record<string, string> = {};
+    const formData = new FormData(form);
+    fieldNames.forEach((name, index) => {
+      const value = String(formData.get(name) || "").trim();
+      if (requiredFields.has(name) && !value) nextErrors[name] = validationCopy.required(copy.fields[index]);
+    });
+    const url = String(formData.get("websiteUrl") || "").trim();
+    if (url && !/^https?:\/\/.+\..+/.test(url)) nextErrors.websiteUrl = validationCopy.url;
+    const email = String(formData.get("email") || "").trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = validationCopy.email;
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!validate(event.currentTarget)) return;
     setStatus("sending");
     const form = event.currentTarget;
     const response = await fetch("/api/review", { method: "POST", body: new FormData(form) });
@@ -78,12 +103,20 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     </div>
   );
   return (
-    <form className="review-form" onSubmit={submit}>
+    <form className="review-form" onSubmit={submit} noValidate>
       <div className="form-grid">
         {copy.fields.slice(0, 4).map((field, index) => (
           <label key={field}>
-            <span>{field}{[0, 2].includes(index) ? " *" : ""}</span>
-            <input name={["propertyName", "websiteUrl", "email", "whatsapp"][index]} type={index === 1 ? "url" : index === 2 ? "email" : "text"} required={[0, 2].includes(index)} placeholder={index === 0 ? (locale === "ja" ? "例：ホテル青葉" : locale === "zh" ? "例如：青岚酒店" : "The Willow House") : index === 1 ? "https://" : index === 2 ? "name@example.com" : "+81 90 0000 0000"} />
+            <span>{field}{requiredFields.has(fieldNames[index]) ? " *" : ""}</span>
+            <input
+              name={fieldNames[index]}
+              type={index === 1 ? "url" : index === 2 ? "email" : "text"}
+              aria-invalid={Boolean(errors[fieldNames[index]])}
+              aria-describedby={errors[fieldNames[index]] ? `${fieldNames[index]}-error` : undefined}
+              placeholder={index === 0 ? (locale === "ja" ? "例：ホテル青葉" : locale === "zh" ? "例如：青岚酒店" : "The Willow House") : index === 1 ? "https://example.com" : index === 2 ? "name@example.com" : "+81 90 0000 0000"}
+              onChange={() => errors[fieldNames[index]] && setErrors((current) => ({ ...current, [fieldNames[index]]: "" }))}
+            />
+            {errors[fieldNames[index]] && <small id={`${fieldNames[index]}-error`} className="field-error">{errors[fieldNames[index]]}</small>}
           </label>
         ))}
       </div>

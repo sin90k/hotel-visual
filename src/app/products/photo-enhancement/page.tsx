@@ -63,9 +63,9 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const uploadCopy = {
-    en: { label: "Upload room photos", help: "Upload 1–5 existing room photos. JPG, PNG or WebP are fine.", required: "Please upload at least one room photo." },
-    ja: { label: "写真をアップロード", help: "既存の客室写真を1〜5枚アップロードしてください。JPG、PNG、WebPに対応しています。", required: "写真を1枚以上アップロードしてください。" },
-    zh: { label: "上传客房照片", help: "上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。", required: "请至少上传一张客房照片。" },
+    en: { label: "Room photos", help: "Optional. Upload 1–5 existing room photos if available. JPG, PNG or WebP are fine." },
+    ja: { label: "客室写真", help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
+    zh: { label: "客房照片", help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
   }[locale];
   const validationCopy = {
     en: { required: (field: string) => `Please enter ${field}.`, url: "Please enter a valid property or OTA URL.", email: "Please enter a valid email address." },
@@ -77,9 +77,9 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     const nextErrors: Record<string, string> = {};
     const formData = new FormData(form);
     const email = String(formData.get("email") || "").trim();
-    const photos = formData.getAll("photos").filter((item) => item instanceof File && item.size > 0);
+    const message = String(formData.get("message") || "").trim();
     if (!email) nextErrors.email = validationCopy.required(copy.fields[2]);
-    if (photos.length === 0) nextErrors.photos = uploadCopy.required;
+    if (!message) nextErrors.message = validationCopy.required(copy.fields[4]);
     const url = String(formData.get("websiteUrl") || "").trim();
     if (url && !/^https?:\/\/.+\..+/.test(url)) nextErrors.websiteUrl = validationCopy.url;
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = validationCopy.email;
@@ -112,11 +112,17 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           <input name="email" type="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} placeholder="name@example.com" onChange={() => errors.email && setErrors((current) => ({ ...current, email: "" }))} />
           {errors.email && <small id="email-error" className="field-error">{errors.email}</small>}
         </label>
+        <label>
+          <span>{copy.fields[3]}</span>
+          <input name="whatsapp" type="text" placeholder={locale === "ja" ? "LINE ID または電話番号" : locale === "zh" ? "微信号或手机号" : "+1 000 000 0000"} />
+        </label>
+      </div>
+      <label className="message-field"><span>{copy.fields[4]} *</span><textarea name="message" rows={4} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder={copy.messagePlaceholder} onChange={() => errors.message && setErrors((current) => ({ ...current, message: "" }))} />{errors.message && <small id="message-error" className="field-error">{errors.message}</small>}</label>
+      <div className="form-grid">
         <label className="file-field">
-          <span>{uploadCopy.label} *</span>
-          <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple aria-invalid={Boolean(errors.photos)} aria-describedby={errors.photos ? "photos-error" : undefined} onChange={() => errors.photos && setErrors((current) => ({ ...current, photos: "" }))} />
+          <span>{uploadCopy.label}</span>
+          <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple />
           <em>{uploadCopy.help}</em>
-          {errors.photos && <small id="photos-error" className="field-error">{errors.photos}</small>}
         </label>
         <label>
           <span>{copy.fields[0]}</span>
@@ -127,12 +133,7 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           <input name="websiteUrl" type="url" aria-invalid={Boolean(errors.websiteUrl)} aria-describedby={errors.websiteUrl ? "websiteUrl-error" : undefined} placeholder="https://example.com" onChange={() => errors.websiteUrl && setErrors((current) => ({ ...current, websiteUrl: "" }))} />
           {errors.websiteUrl && <small id="websiteUrl-error" className="field-error">{errors.websiteUrl}</small>}
         </label>
-        <label>
-          <span>{copy.fields[3]}</span>
-          <input name="whatsapp" type="text" placeholder="+81 90 0000 0000" />
-        </label>
       </div>
-      <label className="message-field"><span>{copy.fields[4]}</span><textarea name="message" rows={4} placeholder={copy.messagePlaceholder} /></label>
       <div className="form-footer">
         <p>{copy.consent}</p>
         <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>
@@ -145,6 +146,11 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
 export default function Home() {
   const { locale } = useLocale();
   const copy = dictionaries[locale];
+  const contactMethod = locale === "zh"
+    ? { href: "tel:+8618905957718", label: "电话 / 微信 +86 189 0595 7718" }
+    : locale === "ja"
+      ? { href: "tel:+8618905957718", label: "電話 +86 189 0595 7718" }
+      : { href: "https://wa.me/8618905957718", label: "WhatsApp +86 189 0595 7718" };
   const go = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); };
 
   return (
@@ -223,7 +229,7 @@ export default function Home() {
 
       <section className="contact-section" id="contact">
         <div><p className="eyebrow"><span />{copy.contact.eyebrow}</p><h2>{copy.contact.title}</h2></div>
-        <div className="contact-list"><a href="mailto:hello@ottervisual.com"><Mail />hello@ottervisual.com</a><a href="https://wa.me/8618905957718"><MessageCircle />WhatsApp +86 189 0595 7718</a><span><MapPin />{copy.contact.location}</span></div>
+        <div className="contact-list"><a href="mailto:hello@ottervisual.com"><Mail />hello@ottervisual.com</a><a href={contactMethod.href}><MessageCircle />{contactMethod.label}</a><span><MapPin />{copy.contact.location}</span></div>
       </section>
 
       <SiteFooter />

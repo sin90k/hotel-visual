@@ -63,7 +63,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Email delivery failed." }, { status: 502 });
   }
 
-  console.info("Property review request received", { propertyName, websiteUrl, email, message, recipient: reviewRecipient, photoCount: photos.length, emailConfigured: true });
+  console.info("Property review request received", {
+    recipient: reviewRecipient,
+    hasPropertyName: Boolean(propertyName),
+    hasWebsiteUrl: Boolean(websiteUrl),
+    hasPhotos: photos.length > 0,
+    photoCount: photos.length,
+    emailConfigured: true,
+  });
 
   return NextResponse.json({ ok: true });
 }

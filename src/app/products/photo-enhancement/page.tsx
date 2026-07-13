@@ -67,6 +67,11 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     ja: { label: "客室写真", help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
     zh: { label: "客房照片", help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
   }[locale];
+  const contactQr = {
+    en: { title: "Prefer chat?", body: "Scan the QR code to add us on WhatsApp.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code", href: "https://wa.me/8618905957718", button: "Chat on WhatsApp" },
+    ja: { title: "LINEでも相談できます", body: "お急ぎの場合や、写真をそのまま送りたい場合はこちらからご連絡ください。", image: "/contact/line-qr.jpg", alt: "LINE QRコード", href: "mailto:sohoumin@gmail.com", button: "メールで相談する" },
+    zh: { title: "扫码添加微信", body: "也可以直接扫码添加微信沟通。", image: "/contact/wechat-qr.jpg", alt: "微信二维码", href: "mailto:sohoumin@gmail.com", button: "发送邮件咨询" },
+  }[locale];
   const validationCopy = {
     en: { required: (field: string) => `Please enter ${field}.`, url: "Please enter a valid property or OTA URL.", email: "Please enter a valid email address." },
     ja: { required: (field: string) => `${field}を入力してください。`, url: "施設またはOTAページのURLを正しく入力してください。", email: "メールアドレスを正しく入力してください。" },
@@ -112,18 +117,14 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           <input name="email" type="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} placeholder="name@example.com" onChange={() => errors.email && setErrors((current) => ({ ...current, email: "" }))} />
           {errors.email && <small id="email-error" className="field-error">{errors.email}</small>}
         </label>
-        <label>
-          <span>{copy.fields[3]}</span>
-          <input name="whatsapp" type="text" placeholder={locale === "ja" ? "LINE ID または電話番号" : locale === "zh" ? "微信号或手机号" : "+1 000 000 0000"} />
-        </label>
-      </div>
-      <label className="message-field"><span>{copy.fields[4]} *</span><textarea name="message" rows={4} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder={copy.messagePlaceholder} onChange={() => errors.message && setErrors((current) => ({ ...current, message: "" }))} />{errors.message && <small id="message-error" className="field-error">{errors.message}</small>}</label>
-      <div className="form-grid">
         <label className="file-field">
           <span>{uploadCopy.label}</span>
           <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple />
           <em>{uploadCopy.help}</em>
         </label>
+      </div>
+      <label className="message-field"><span>{copy.fields[4]} *</span><textarea name="message" rows={4} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder={copy.messagePlaceholder} onChange={() => errors.message && setErrors((current) => ({ ...current, message: "" }))} />{errors.message && <small id="message-error" className="field-error">{errors.message}</small>}</label>
+      <div className="form-grid">
         <label>
           <span>{copy.fields[0]}</span>
           <input name="propertyName" type="text" placeholder={locale === "ja" ? "例：ホテル青葉" : locale === "zh" ? "例如：青岚酒店" : "The Willow House"} />
@@ -134,6 +135,7 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           {errors.websiteUrl && <small id="websiteUrl-error" className="field-error">{errors.websiteUrl}</small>}
         </label>
       </div>
+      <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={108} height={108} /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p><a className="contact-qr-link" href={contactQr.href}>{contactQr.button}</a></div></div>
       <div className="form-footer">
         <p>{copy.consent}</p>
         <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>
@@ -147,10 +149,10 @@ export default function Home() {
   const { locale } = useLocale();
   const copy = dictionaries[locale];
   const contactMethod = locale === "zh"
-    ? { href: "tel:+8618905957718", label: "电话 / 微信 +86 189 0595 7718" }
+    ? { href: "#review", label: "微信二维码 / 邮件咨询" }
     : locale === "ja"
-      ? { href: "tel:+8618905957718", label: "電話 +86 189 0595 7718" }
-      : { href: "https://wa.me/8618905957718", label: "WhatsApp +86 189 0595 7718" };
+      ? { href: "#review", label: "LINE・メールで相談" }
+      : { href: "#review", label: "WhatsApp / Email" };
   const go = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); };
 
   return (
@@ -229,7 +231,7 @@ export default function Home() {
 
       <section className="contact-section" id="contact">
         <div><p className="eyebrow"><span />{copy.contact.eyebrow}</p><h2>{copy.contact.title}</h2></div>
-        <div className="contact-list"><a href="mailto:hello@ottervisual.com"><Mail />hello@ottervisual.com</a><a href={contactMethod.href}><MessageCircle />{contactMethod.label}</a><span><MapPin />{copy.contact.location}</span></div>
+        <div className="contact-list"><a href="mailto:sohoumin@gmail.com"><Mail />sohoumin@gmail.com</a><a href={contactMethod.href}><MessageCircle />{contactMethod.label}</a><span><MapPin />{copy.contact.location}</span></div>
       </section>
 
       <SiteFooter />

@@ -10,7 +10,7 @@ import { useLocale } from "@/components/locale-provider";
 
 const shellCopy = {
   en: { brand: "Rakko Stay", home: "Home", photo: "Photo Enhancement", feedback: "Service Recovery", contact: "Free Assessment", descriptor: "Together through every stay", copyright: "All rights reserved." },
-  ja: { brand: "ラッコステイ", home: "ホーム", photo: "写真・予約ページ改善", feedback: "サービスリカバリー", contact: "無料診断", descriptor: "すべての滞在に、寄り添う。", copyright: "無断転載を禁じます。" },
+  ja: { brand: "ラッコステイ", home: "ホーム", photo: "写真改善", feedback: "ゲスト対応QR", contact: "無料相談", descriptor: "すべての滞在に、寄り添う。", copyright: "無断転載を禁じます。" },
   zh: { brand: "海獭住伴", home: "首页", photo: "客房图片优化", feedback: "吐槽码", contact: "免费评估", descriptor: "一起守住每一次入住体验", copyright: "版权所有。" },
 } as const;
 
@@ -45,7 +45,7 @@ export function SiteFooter() {
       <Image src="/brand/otter-stay/otter-stay-selected-icon.png" alt="" aria-hidden="true" width={58} height={58} />
       <span><strong>{copy.brand}</strong><span>{copy.descriptor}</span></span>
     </div>
-    <nav><Link href="/products/photo-enhancement">{copy.photo}</Link><Link href="/products/guest-feedback">{copy.feedback}</Link><a href="mailto:hello@ottervisual.com">hello@ottervisual.com</a></nav>
+    <nav><Link href="/products/photo-enhancement">{copy.photo}</Link><Link href="/products/guest-feedback">{copy.feedback}</Link><a href="mailto:sohoumin@gmail.com">sohoumin@gmail.com</a></nav>
     <p>© {new Date().getFullYear()} {copy.brand}. {copy.copyright}</p>
   </footer>;
 }

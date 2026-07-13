@@ -327,6 +327,11 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
 .file-field input[type="file"]::file-selector-button { margin-right:14px; border:0; background:var(--ocean); color:#fff; padding:9px 13px; font-weight:700; cursor:pointer; }
 .file-field em { color:#7f8a8c; font-size:12px; line-height:1.5; font-style:normal; }
 .home-review .file-field input[type="file"] { border-color:#c6d8db; padding:14px; background:#f7fbfb; font-size:14px; }
+.contact-qr-card { display:grid; grid-template-columns:108px 1fr; align-items:center; gap:18px; padding:18px; border:1px solid #dce8e8; background:#fbfefe; color:var(--charcoal); }
+.contact-qr-card img { width:108px; height:108px; object-fit:contain; border-radius:12px; background:#fff; box-shadow:0 12px 26px rgba(13,59,102,.08); }
+.contact-qr-card strong { display:block; font-size:17px; line-height:1.35; margin-bottom:7px; color:var(--ocean); }
+.contact-qr-card p { margin:0; color:#586463; font-size:14px; line-height:1.6; }
+.contact-qr-link { display:none; margin-top:12px; width:max-content; text-decoration:none; color:var(--ocean); border-bottom:1px solid var(--ocean); font-size:14px; font-weight:700; padding-bottom:4px; }
 .home-success { min-height:440px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .home-success>svg { width:52px; height:52px; padding:14px; border-radius:50%; background:#e8efe7; color:var(--success); }
 .home-success h3 { margin:24px 0 12px; font:400 38px var(--font-serif); }
@@ -397,6 +402,11 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
   .home-review form { grid-template-columns:1fr; }
   .home-review form label,.home-review .wide,.home-review form>button { grid-column:1; }
   .home-review form>button { width:100%; }
+  .contact-qr-card { grid-template-columns:88px 1fr; padding:14px; }
+  .contact-qr-card img { width:88px; height:88px; }
+  html[lang="ja"] .contact-qr-card { grid-template-columns:1fr; }
+  html[lang="ja"] .contact-qr-image { display:none; }
+  html[lang="ja"] .contact-qr-link { display:inline-flex; }
 }
 
 @media (max-width:860px) {

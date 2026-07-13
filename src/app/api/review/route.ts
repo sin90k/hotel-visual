@@ -26,41 +26,44 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Message is required." }, { status: 400 });
   }
 
+  if (!resendApiKey) {
+    console.error("Review form email delivery is not configured. Missing RESEND_API_KEY.");
+    return NextResponse.json({ error: "Email delivery is not configured." }, { status: 503 });
+  }
+
   const attachments = await Promise.all(photos.map(async (photo) => ({
     filename: photo.name,
     content: Buffer.from(await photo.arrayBuffer()).toString("base64"),
   })));
 
-  if (resendApiKey) {
-    const emailResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${resendApiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: process.env.RESEND_FROM || "Rakko Stay <onboarding@resend.dev>",
-        to: [reviewRecipient],
-        reply_to: email,
-        subject: `New Rakko Stay assessment request${propertyName ? `: ${escapeHtml(propertyName)}` : ""}`,
-        html: [
-          "<h2>New assessment request</h2>",
-          `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
-          `<p><strong>Property:</strong> ${escapeHtml(propertyName || "Not provided")}</p>`,
-          `<p><strong>URL:</strong> ${escapeHtml(websiteUrl || "Not provided")}</p>`,
-          `<p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>`,
-        ].join(""),
-        attachments,
-      }),
-    });
+  const emailResponse = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: process.env.RESEND_FROM || "Rakko Stay <onboarding@resend.dev>",
+      to: [reviewRecipient],
+      reply_to: email,
+      subject: `New Rakko Stay assessment request${propertyName ? `: ${escapeHtml(propertyName)}` : ""}`,
+      html: [
+        "<h2>New assessment request</h2>",
+        `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
+        `<p><strong>Property:</strong> ${escapeHtml(propertyName || "Not provided")}</p>`,
+        `<p><strong>URL:</strong> ${escapeHtml(websiteUrl || "Not provided")}</p>`,
+        `<p><strong>Message:</strong></p><p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>`,
+      ].join(""),
+      attachments,
+    }),
+  });
 
-    if (!emailResponse.ok) {
-      console.error("Failed to send review email", await emailResponse.text());
-      return NextResponse.json({ error: "Email delivery failed." }, { status: 502 });
-    }
+  if (!emailResponse.ok) {
+    console.error("Failed to send review email", await emailResponse.text());
+    return NextResponse.json({ error: "Email delivery failed." }, { status: 502 });
   }
 
-  console.info("Property review request received", { propertyName, websiteUrl, email, message, recipient: reviewRecipient, photoCount: photos.length, emailConfigured: Boolean(resendApiKey) });
+  console.info("Property review request received", { propertyName, websiteUrl, email, message, recipient: reviewRecipient, photoCount: photos.length, emailConfigured: true });
 
   return NextResponse.json({ ok: true });
 }

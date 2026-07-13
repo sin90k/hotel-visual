@@ -79,12 +79,12 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     zh: { required: (field: string) => `请填写${field}。`, url: "请填写有效的房源或OTA链接。", email: "请填写有效的邮箱地址。" },
   }[locale];
 
-  function addPhotos(files: FileList | null) {
-    if (!files?.length) return;
+  function addPhotos(files: File[]) {
+    if (!files.length) return;
     setSelectedPhotos((current) => {
       const available = Math.max(0, 5 - current.length);
-      const next = Array.from(files).slice(0, available).map((file) => ({
-        id: `${file.name}-${file.size}-${file.lastModified}-${crypto.randomUUID()}`,
+      const next = files.slice(0, available).map((file) => ({
+        id: `${file.name}-${file.size}-${file.lastModified}-${Date.now()}-${Math.random().toString(36).slice(2)}`,
         name: file.name,
         url: URL.createObjectURL(file),
         file,
@@ -149,7 +149,7 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
         </label>
         <label className="file-field file-field-compact">
           <span>{uploadCopy.label}</span>
-          <input type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => { addPhotos(event.currentTarget.files); event.currentTarget.value = ""; }} />
+          <input type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => { const files = Array.from(event.currentTarget.files || []); event.currentTarget.value = ""; addPhotos(files); }} />
           <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b><small>{uploadCopy.selected(selectedPhotos.length)}</small></div>
           <em>{uploadCopy.help}</em>
         </label>

@@ -62,11 +62,11 @@ function Comparison({ title, beforeImage, afterImage, beforeFilter, before, afte
 function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["review"]; locale: "en" | "ja" | "zh" }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [selectedPhotos, setSelectedPhotos] = useState("");
+  const [selectedPhotos, setSelectedPhotos] = useState<Array<{ id: string; name: string; url: string; file: File }>>([]);
   const uploadCopy = {
-    en: { label: "Room photos", choose: "Select photos", selected: (count: number) => `${count} photo${count > 1 ? "s" : ""} selected`, help: "Optional. Upload 1–5 existing room photos if available. JPG, PNG or WebP are fine." },
-    ja: { label: "客室写真", choose: "写真を選択", selected: (count: number) => `${count}枚の写真を選択済み`, help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
-    zh: { label: "客房照片", choose: "选择照片", selected: (count: number) => `已选择 ${count} 张照片`, help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
+    en: { label: "Room photos", choose: "Add photos", selected: (count: number) => `${count}/5 selected`, remove: "Remove", help: "Optional. Add up to 5 existing room photos. JPG, PNG or WebP are fine." },
+    ja: { label: "客室写真", choose: "写真を追加", selected: (count: number) => `${count}/5枚を選択済み`, remove: "削除", help: "任意。最大5枚まで追加できます。JPG、PNG、WebPに対応しています。" },
+    zh: { label: "客房照片", choose: "添加照片", selected: (count: number) => `已选择 ${count}/5 张`, remove: "删除", help: "选填。最多添加 5 张现有客房照片，支持 JPG、PNG 或 WebP。" },
   }[locale];
   const contactQr = {
     en: { title: "Prefer chat?", body: "Scan the QR code to add us on WhatsApp.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code", href: "https://wa.me/8618905957718", button: "Chat on WhatsApp" },
@@ -78,6 +78,28 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     ja: { required: (field: string) => `${field}を入力してください。`, url: "施設またはOTAページのURLを正しく入力してください。", email: "メールアドレスを正しく入力してください。" },
     zh: { required: (field: string) => `请填写${field}。`, url: "请填写有效的房源或OTA链接。", email: "请填写有效的邮箱地址。" },
   }[locale];
+
+  function addPhotos(files: FileList | null) {
+    if (!files?.length) return;
+    setSelectedPhotos((current) => {
+      const available = Math.max(0, 5 - current.length);
+      const next = Array.from(files).slice(0, available).map((file) => ({
+        id: `${file.name}-${file.size}-${file.lastModified}-${crypto.randomUUID()}`,
+        name: file.name,
+        url: URL.createObjectURL(file),
+        file,
+      }));
+      return [...current, ...next];
+    });
+  }
+
+  function removePhoto(id: string) {
+    setSelectedPhotos((current) => {
+      const target = current.find((photo) => photo.id === id);
+      if (target) URL.revokeObjectURL(target.url);
+      return current.filter((photo) => photo.id !== id);
+    });
+  }
 
   function validate(form: HTMLFormElement) {
     const nextErrors: Record<string, string> = {};
@@ -98,11 +120,15 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     if (!validate(event.currentTarget)) return;
     setStatus("sending");
     const form = event.currentTarget;
-    const response = await fetch("/api/review", { method: "POST", body: new FormData(form) });
+    const formData = new FormData(form);
+    formData.delete("photos");
+    selectedPhotos.forEach((photo) => formData.append("photos", photo.file, photo.name));
+    const response = await fetch("/api/review", { method: "POST", body: formData });
     setStatus(response.ok ? "success" : "error");
     if (response.ok) {
       form.reset();
-      setSelectedPhotos("");
+      selectedPhotos.forEach((photo) => URL.revokeObjectURL(photo.url));
+      setSelectedPhotos([]);
     }
   }
   if (status === "success") return (
@@ -121,14 +147,15 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           <input name="email" type="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} placeholder="name@example.com" onChange={() => errors.email && setErrors((current) => ({ ...current, email: "" }))} />
           {errors.email && <small id="email-error" className="field-error">{errors.email}</small>}
         </label>
-        <label className="file-field">
+        <label className="file-field file-field-compact">
           <span>{uploadCopy.label}</span>
-          <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => setSelectedPhotos(event.currentTarget.files?.length ? uploadCopy.selected(event.currentTarget.files.length) : "")} />
-          <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b>{selectedPhotos && <small>{selectedPhotos}</small>}</div>
+          <input type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => { addPhotos(event.currentTarget.files); event.currentTarget.value = ""; }} />
+          <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b><small>{uploadCopy.selected(selectedPhotos.length)}</small></div>
           <em>{uploadCopy.help}</em>
         </label>
       </div>
       <label className="message-field"><span>{copy.fields[4]} *</span><textarea name="message" rows={4} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder={copy.messagePlaceholder} onChange={() => errors.message && setErrors((current) => ({ ...current, message: "" }))} />{errors.message && <small id="message-error" className="field-error">{errors.message}</small>}</label>
+      {selectedPhotos.length > 0 && <div className="photo-preview-grid">{selectedPhotos.map((photo) => <figure key={photo.id}><img src={photo.url} alt={photo.name} /><button type="button" onClick={() => removePhoto(photo.id)}>{uploadCopy.remove}</button></figure>)}</div>}
       <div className="form-grid">
         <label>
           <span>{copy.fields[0]}</span>

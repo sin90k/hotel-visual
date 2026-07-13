@@ -62,10 +62,11 @@ function Comparison({ title, beforeImage, afterImage, beforeFilter, before, afte
 function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["review"]; locale: "en" | "ja" | "zh" }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [selectedPhotos, setSelectedPhotos] = useState("");
   const uploadCopy = {
-    en: { label: "Room photos", choose: "Select photos", help: "Optional. Upload 1–5 existing room photos if available. JPG, PNG or WebP are fine." },
-    ja: { label: "客室写真", choose: "写真を選択", help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
-    zh: { label: "客房照片", choose: "选择照片", help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
+    en: { label: "Room photos", choose: "Select photos", selected: (count: number) => `${count} photo${count > 1 ? "s" : ""} selected`, help: "Optional. Upload 1–5 existing room photos if available. JPG, PNG or WebP are fine." },
+    ja: { label: "客室写真", choose: "写真を選択", selected: (count: number) => `${count}枚の写真を選択済み`, help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
+    zh: { label: "客房照片", choose: "选择照片", selected: (count: number) => `已选择 ${count} 张照片`, help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
   }[locale];
   const contactQr = {
     en: { title: "Prefer chat?", body: "Scan the QR code to add us on WhatsApp.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code", href: "https://wa.me/8618905957718", button: "Chat on WhatsApp" },
@@ -99,7 +100,10 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     const form = event.currentTarget;
     const response = await fetch("/api/review", { method: "POST", body: new FormData(form) });
     setStatus(response.ok ? "success" : "error");
-    if (response.ok) form.reset();
+    if (response.ok) {
+      form.reset();
+      setSelectedPhotos("");
+    }
   }
   if (status === "success") return (
     <div className="success-state" role="status">
@@ -119,8 +123,8 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
         </label>
         <label className="file-field">
           <span>{uploadCopy.label}</span>
-          <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple />
-          <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b></div>
+          <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple onChange={(event) => setSelectedPhotos(event.currentTarget.files?.length ? uploadCopy.selected(event.currentTarget.files.length) : "")} />
+          <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b>{selectedPhotos && <small>{selectedPhotos}</small>}</div>
           <em>{uploadCopy.help}</em>
         </label>
       </div>

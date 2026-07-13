@@ -604,3 +604,114 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   .unified-footer nav a { font-size:15px; }
   .unified-footer p { font-size:12px; line-height:1.6; }
 }
+
+/* Conversion section redesign */
+.home-review {
+  display:block;
+  padding:92px 7.2vw 104px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(217,237,242,.13), transparent 30%),
+    linear-gradient(135deg,var(--ocean) 0%,#123c4b 100%);
+}
+.home-review>div:first-child {
+  max-width:860px;
+  margin:0 auto 34px;
+  text-align:center;
+}
+.home-review h2 {
+  max-width:760px;
+  margin:0 auto;
+}
+.home-review>div:first-child>p {
+  max-width:680px;
+  margin:20px auto 0;
+}
+.home-review ul {
+  max-width:880px;
+  margin:28px auto 0;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+.home-review li {
+  min-height:48px;
+  padding:11px 13px;
+  justify-content:center;
+  text-align:center;
+  border:1px solid rgba(217,237,242,.18);
+  background:rgba(255,255,255,.055);
+}
+.home-review form,
+.home-success {
+  width:min(100%,860px);
+  margin:0 auto;
+  justify-self:center;
+  padding:36px;
+}
+.home-review form {
+  gap:16px;
+}
+.home-review label {
+  padding:18px 20px;
+}
+.home-review textarea {
+  min-height:118px;
+}
+.file-upload-box {
+  min-height:86px;
+}
+.photo-preview-grid {
+  grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+  padding:16px;
+}
+.contact-qr-card {
+  grid-template-columns:96px 1fr;
+  padding:18px 20px;
+}
+.contact-qr-card img {
+  width:96px;
+  height:96px;
+}
+.home-review form>button {
+  justify-self:stretch;
+  min-height:56px;
+  justify-content:center;
+}
+
+@media (max-width:860px) {
+  .home-review {
+    padding:76px 22px 86px;
+  }
+  .home-review ul {
+    grid-template-columns:1fr 1fr;
+  }
+  .home-review form,
+  .home-success {
+    padding:28px 22px;
+  }
+}
+
+@media (max-width:560px) {
+  .home-review>div:first-child {
+    text-align:left;
+  }
+  .home-review h2,
+  .home-review>div:first-child>p {
+    margin-left:0;
+    margin-right:0;
+  }
+  .home-review ul {
+    grid-template-columns:1fr;
+  }
+  .home-review li {
+    justify-content:flex-start;
+    text-align:left;
+  }
+  .contact-qr-card {
+    grid-template-columns:76px 1fr;
+  }
+  .contact-qr-card img {
+    width:76px;
+    height:76px;
+  }
+}

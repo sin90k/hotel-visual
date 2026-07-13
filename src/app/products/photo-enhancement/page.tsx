@@ -63,9 +63,9 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const uploadCopy = {
-    en: { label: "Room photos", choose: "Select photos", hint: "No file required", help: "Optional. Upload 1–5 existing room photos if available. JPG, PNG or WebP are fine." },
-    ja: { label: "客室写真", choose: "写真を選択", hint: "未選択でも送信できます", help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
-    zh: { label: "客房照片", choose: "选择照片", hint: "不上传也可以提交", help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
+    en: { label: "Room photos", choose: "Select photos", help: "Optional. Upload 1–5 existing room photos if available. JPG, PNG or WebP are fine." },
+    ja: { label: "客室写真", choose: "写真を選択", help: "任意。写真があれば1〜5枚アップロードできます。JPG、PNG、WebPに対応しています。" },
+    zh: { label: "客房照片", choose: "选择照片", help: "选填。如方便，可上传1–5张现有客房照片，支持 JPG、PNG 或 WebP。" },
   }[locale];
   const contactQr = {
     en: { title: "Prefer chat?", body: "Scan the QR code to add us on WhatsApp.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code", href: "https://wa.me/8618905957718", button: "Chat on WhatsApp" },
@@ -120,7 +120,7 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
         <label className="file-field">
           <span>{uploadCopy.label}</span>
           <input name="photos" type="file" accept="image/png,image/jpeg,image/webp" multiple />
-          <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b><small>{uploadCopy.hint}</small></div>
+          <div className="file-upload-box" aria-hidden="true"><b>{uploadCopy.choose}</b></div>
           <em>{uploadCopy.help}</em>
         </label>
       </div>

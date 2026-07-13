@@ -194,6 +194,26 @@ html[lang="en"] .feedback-system-intro h2,html[lang="en"] .feedback-roles h2 { f
 .feedback-steps article>svg { width:56px; height:56px; margin-top:32px; padding:15px; border:1px solid #d8c59f; border-radius:50%; background:#f3ead8; color:#6f684f; stroke-width:1.6; box-shadow:0 8px 24px rgba(92,78,50,.08); }
 .feedback-steps article:first-child>svg,.feedback-steps article:last-child>svg { border-color:rgba(216,185,125,.55); background:rgba(216,185,125,.1); color:#e0bd7c; box-shadow:none; }
 .feedback-final { padding:72px 7.2vw; display:flex; align-items:center; justify-content:space-between; gap:48px; background:var(--olive); color:var(--white); }.feedback-final p { color:#d6b67b; margin-bottom:12px; }.feedback-final h2 { max-width:680px; }
+.feedback-demo-section { padding:105px 7.2vw; display:grid; grid-template-columns:minmax(320px,.78fr) minmax(520px,1fr); gap:7vw; align-items:center; background:linear-gradient(135deg,var(--ocean),#123c4b); color:#fff; }
+.feedback-demo-section>div:first-child>p:not(.eyebrow) { max-width:520px; margin:24px 0 32px; color:#dce7e8; font-size:16px; line-height:1.75; }
+.feedback-demo-section h2 { max-width:640px; font-size:clamp(38px,3.7vw,52px); line-height:1.1; }
+.feedback-demo-section ul { list-style:none; padding:0; margin:0; display:grid; gap:13px; }
+.feedback-demo-section li { display:flex; align-items:center; gap:11px; color:#f7fbfb; font-size:15px; }
+.feedback-demo-section li svg { width:16px; color:#d8b97d; }
+.feedback-contact-form,.feedback-form-success { width:min(100%,820px); justify-self:end; padding:34px; background:linear-gradient(180deg,#fff,#f6fbfb); color:var(--charcoal); border:1px solid rgba(217,237,242,.9); box-shadow:0 22px 52px rgba(13,33,38,.22); }
+.feedback-contact-form { display:grid; gap:15px; }
+.feedback-contact-form label { display:grid; gap:8px; padding:17px 19px; background:#fbfefe; border:1px solid #dce8e8; transition:border-color .2s,box-shadow .2s,background .2s; }
+.feedback-contact-form label:focus-within { border-color:#95bfca; background:#fff; box-shadow:0 0 0 4px rgba(217,237,242,.65); }
+.feedback-contact-form label>span { color:#4e5551; font-size:13px; font-weight:700; letter-spacing:.01em; }
+.feedback-contact-form input,.feedback-contact-form textarea { width:100%; border:0; outline:0; padding:0; background:transparent; color:var(--charcoal); font-size:15px; line-height:1.5; }
+.feedback-contact-form textarea { min-height:120px; resize:vertical; }
+.feedback-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.feedback-contact-form>button { justify-content:center; min-height:56px; }
+.feedback-form-success { min-height:420px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.feedback-form-success svg { width:56px; height:56px; padding:13px; border-radius:50%; background:#e3ede5; color:var(--success); }
+.feedback-form-success h3 { margin:24px 0 12px; font:400 34px/1.2 var(--font-serif); }
+.feedback-form-success p { max-width:520px; color:var(--ink); line-height:1.7; }
+.feedback-form-success button { margin-top:20px; border:0; border-bottom:1px solid var(--charcoal); background:transparent; padding:8px 0; cursor:pointer; }
 .feedback-example { padding:120px 7.2vw; background:var(--white); }
 .feedback-example-heading { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr); gap:8vw; align-items:end; margin-bottom:58px; }
 .feedback-example-heading h2 { max-width:850px; font-size:clamp(48px,5vw,74px); line-height:1.04; }
@@ -713,5 +733,29 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   .contact-qr-card img {
     width:76px;
     height:76px;
+  }
+}
+
+@media (max-width:860px) {
+  .feedback-demo-section {
+    padding:80px 22px;
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .feedback-contact-form,
+  .feedback-form-success {
+    width:100%;
+    justify-self:stretch;
+    padding:28px 22px;
+  }
+}
+
+@media (max-width:560px) {
+  .feedback-form-grid {
+    grid-template-columns:1fr;
+  }
+  .feedback-demo-section h2 {
+    font-size:30px;
+    line-height:1.18;
   }
 }

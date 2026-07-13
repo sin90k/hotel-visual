@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FormEvent, useState } from "react";
 import { AlertTriangle, ArrowRight, BadgeCheck, BellRing, Building2, Check, ClipboardCheck, ClipboardPlus, Clock3, FileBarChart, LayoutDashboard, MessageSquareText, MessageSquareWarning, QrCode, ScanSearch, ShieldCheck, Smartphone, Star, Users, Wrench } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { SiteFooter, SiteHeader } from "@/components/site-shell";
@@ -47,13 +48,43 @@ const dashboardCopy = {
   zh: { title: "经理看板", sample: "界面示意", stats: [["待处理", "12"], ["高风险", "3"], ["已超时", "2"], ["处理中", "7"]], queue: "实时工单", tickets: [["1208", "空调噪声影响休息", "高风险", "工程部"], ["0816", "需要补送两条毛巾", "已派单", "客房部"], ["1512", "热水温度偏低", "处理中", "工程部"]], updated: "刚刚更新" },
 } as const;
 
+const demoFormCopy = {
+  en: {
+    eyebrow: "Request a demo",
+    title: "See how Guest Feedback QR would work in your property",
+    body: "Leave your email and a short note. We can walk through the room QR flow, staff handling screen and manager view.",
+    bullets: ["Room QR flow preview", "Staff task workflow", "Manager dashboard example"],
+    fields: { email: "Email", message: "What would you like to discuss?", property: "Property name", url: "Property website or OTA URL" },
+    placeholders: { email: "name@example.com", message: "Tell us about your current guest feedback or complaint handling process.", property: "The Willow House", url: "https://example.com" },
+    submit: "Request demo", sending: "Submitting…", success: "Demo request received", successBody: "We have received your request. We will contact you after reviewing the details.", error: "The form could not be submitted. Please contact us by email or WhatsApp.",
+  },
+  ja: {
+    eyebrow: "導入相談",
+    title: "ゲスト対応QRの使い方を確認する",
+    body: "メールアドレスとご相談内容をお送りください。客室QR、スタッフ対応画面、責任者画面の流れをご案内します。",
+    bullets: ["客室QRの利用イメージ", "スタッフ対応フロー", "責任者画面の確認"],
+    fields: { email: "メールアドレス", message: "ご相談内容", property: "施設名", url: "施設またはOTAページURL" },
+    placeholders: { email: "name@example.com", message: "現在のクチコミ対応や、滞在中のご意見対応についてお聞かせください。", property: "例：ホテル青葉", url: "https://example.com" },
+    submit: "導入相談を申し込む", sending: "送信中…", success: "お申し込みありがとうございます", successBody: "ご相談内容を受け付けました。確認後、担当者よりご連絡します。", error: "送信できませんでした。お手数ですが、メールまたはLINEでご連絡ください。",
+  },
+  zh: {
+    eyebrow: "产品演示",
+    title: "看看吐槽码如何接住客诉",
+    body: "留下邮箱和想了解的内容即可。我们可以演示住客扫码、员工处理、经理看板和闭环记录。",
+    bullets: ["住客扫码反馈流程", "员工接单处理流程", "经理看板与闭环记录"],
+    fields: { email: "联系邮箱", message: "想了解的内容", property: "酒店或民宿名称", url: "酒店网站或房源链接" },
+    placeholders: { email: "name@example.com", message: "可以简单说说目前客诉处理、差评、住客反馈方面的问题。", property: "例如：青岚酒店", url: "https://example.com" },
+    submit: "申请产品演示", sending: "正在提交…", success: "已收到演示申请", successBody: "我们已收到您的咨询内容。确认后，工作人员会与您联系。", error: "提交失败，请通过邮件或微信联系我们。",
+  },
+} as const;
+
 export default function GuestFeedbackPage() {
   const { locale } = useLocale();
   const copy = feedbackCopy[locale];
   return (
     <main className="feedback-page">
       <SiteHeader />
-      <section className="feedback-hero"><div><p className="eyebrow light"><span />{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.body}</p><a className="button button-gold" href="mailto:sohoumin@gmail.com">{copy.cta}<ArrowRight /></a></div><FeedbackDemo copy={copy.demoUi} /></section>
+      <section className="feedback-hero"><div><p className="eyebrow light"><span />{copy.eyebrow}</p><h1>{copy.title}</h1><p>{copy.body}</p><a className="button button-gold" href="#demo">{copy.cta}<ArrowRight /></a></div><FeedbackDemo copy={copy.demoUi} /></section>
       <section className="feedback-problem"><div><p className="eyebrow"><span />{copy.why}</p><h2>{copy.problemTitle}</h2></div><p>{copy.problemBody}</p></section>
       <section className="feedback-benefits">{copy.benefits.map(([title, body], index) => { const Icon = [ShieldCheck, Clock3, QrCode][index]; return <article key={title}><Icon /><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>; })}</section>
       <section className="feedback-story"><div className="feedback-story-heading"><p className="eyebrow"><span />{copy.story.eyebrow}</p><h2>{copy.story.title}</h2></div><div className="feedback-story-grid">{copy.story.items.map(([title, body], index) => { const images = ["/images/guest-feedback/guest-scan-qr.jpg", "/images/guest-feedback/front-desk-alert.jpg", "/images/guest-feedback/issue-resolution.jpg"]; return <figure key={title} className={index === 0 ? "story-primary" : ""}><div><Image src={images[index]} alt={title} fill sizes={index === 0 ? "(max-width: 860px) 100vw, 58vw" : "(max-width: 860px) 100vw, 29vw"} /></div><figcaption><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p></figcaption></figure>; })}</div></section>
@@ -61,10 +92,65 @@ export default function GuestFeedbackPage() {
       <section className="feedback-steps"><p className="eyebrow"><span />{copy.how}</p><h2>{copy.stepsTitle}</h2><div>{copy.steps.map(([title, body], index) => {const Icon=[QrCode,MessageSquareText,ScanSearch,ClipboardPlus,Wrench,BellRing,BadgeCheck][index];return <article key={title}><b>0{index + 1}</b><Icon/><h3>{title}</h3><p>{body}</p></article>})}</div></section>
       <section className="feedback-example"><div className="feedback-example-heading"><div><p className="eyebrow"><span />{copy.example.eyebrow}</p><h2>{copy.example.title}</h2></div><p>{copy.example.note}</p></div><div className="feedback-example-board"><div className="feedback-event"><QrCode /><span>{copy.example.event}</span></div><div className="feedback-timeline">{copy.example.timeline.map(([time,title,body],index)=>{const Icon=[MessageSquareWarning,Clock3,ShieldCheck,Check][index];return <article key={time}><span>{time}</span><Icon/><div><h3>{title}</h3><p>{body}</p></div></article>})}</div><aside><strong>{copy.example.resultTitle}</strong>{copy.example.results.map(item=><p key={item}><Check/>{item}</p>)}</aside></div></section>
       <section className="feedback-roles"><div><p className="eyebrow light"><span />{copy.roles.eyebrow}</p><h2>{copy.roles.title}</h2></div><div>{copy.roles.items.map(([title,body],index)=>{const Icon=[Smartphone,Users,LayoutDashboard,Building2][index];return <article key={title}><Icon/><h3>{title}</h3><p>{body}</p></article>})}</div></section>
-      <section className="feedback-final"><div><p>{copy.price}</p><h2>{copy.final}</h2></div><a className="button button-gold" href="mailto:sohoumin@gmail.com">{copy.demo}<ArrowRight /></a></section>
+      <section className="feedback-demo-section" id="demo"><div><p className="eyebrow light"><span />{demoFormCopy[locale].eyebrow}</p><h2>{demoFormCopy[locale].title}</h2><p>{demoFormCopy[locale].body}</p><ul>{demoFormCopy[locale].bullets.map(item => <li key={item}><Check />{item}</li>)}</ul></div><GuestFeedbackForm locale={locale} /></section>
+      <section className="feedback-final"><div><p>{copy.price}</p><h2>{copy.final}</h2></div><a className="button button-gold" href="#demo">{copy.demo}<ArrowRight /></a></section>
       <SiteFooter />
     </main>
   );
+}
+
+function GuestFeedbackForm({ locale }: { locale: "en" | "ja" | "zh" }) {
+  const copy = demoFormCopy[locale];
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const contactQr = {
+    en: { title: "Prefer WhatsApp?", body: "You can also scan and message us directly.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code" },
+    ja: { title: "LINEでも相談できます", body: "お急ぎの場合は、LINEからもご連絡いただけます。", image: "/contact/line-qr.jpg", alt: "LINE QRコード" },
+    zh: { title: "扫码添加微信", body: "也可以直接扫码添加微信沟通。", image: "/contact/wechat-qr.jpg", alt: "微信二维码" },
+  }[locale];
+
+  function validate(form: HTMLFormElement) {
+    const formData = new FormData(form);
+    const nextErrors: Record<string, string> = {};
+    const email = String(formData.get("email") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = locale === "ja" ? "メールアドレスを入力してください。" : locale === "zh" ? "请填写有效邮箱。" : "Please enter a valid email.";
+    if (!message) nextErrors.message = locale === "ja" ? "ご相談内容を入力してください。" : locale === "zh" ? "请填写想了解的内容。" : "Please enter a message.";
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!validate(event.currentTarget)) return;
+    setStatus("sending");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    formData.append("serviceType", "Guest Feedback QR / 吐槽码");
+    const response = await fetch("/api/review", { method: "POST", body: formData });
+    if (response.ok) {
+      setStatus("success");
+      form.reset();
+    } else {
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return <div className="feedback-form-success"><Check /><h3>{copy.success}</h3><p>{copy.successBody}</p><button onClick={() => setStatus("idle")}>{copy.submit}</button></div>;
+  }
+
+  return <form className="feedback-contact-form" onSubmit={submit} noValidate>
+    <label><span>{copy.fields.email} *</span><input name="email" type="email" placeholder={copy.placeholders.email} aria-invalid={Boolean(errors.email)} onChange={() => errors.email && setErrors(current => ({ ...current, email: "" }))} />{errors.email && <small className="field-error">{errors.email}</small>}</label>
+    <label><span>{copy.fields.message} *</span><textarea name="message" rows={5} placeholder={copy.placeholders.message} aria-invalid={Boolean(errors.message)} onChange={() => errors.message && setErrors(current => ({ ...current, message: "" }))} />{errors.message && <small className="field-error">{errors.message}</small>}</label>
+    <div className="feedback-form-grid">
+      <label><span>{copy.fields.property}</span><input name="propertyName" type="text" placeholder={copy.placeholders.property} /></label>
+      <label><span>{copy.fields.url}</span><input name="websiteUrl" type="url" placeholder={copy.placeholders.url} /></label>
+    </div>
+    <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={108} height={108} /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p></div></div>
+    {status === "error" && <p className="form-error">{copy.error}</p>}
+    <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>
+  </form>;
 }
 
 function FeedbackDemo({ copy }: { copy: { readonly room: string; readonly question: string; readonly issue: string; readonly housekeeping: string; readonly other: string; readonly private: string } }) {

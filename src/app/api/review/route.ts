@@ -15,6 +15,7 @@ export async function POST(request: Request) {
   const message = String(form.get("message") || "").trim();
   const propertyName = String(form.get("propertyName") || "Photo sample request");
   const websiteUrl = String(form.get("websiteUrl") || "");
+  const serviceType = String(form.get("serviceType") || "Room Photo / OTA Assessment");
   const photos = form.getAll("photos").filter((item): item is File => item instanceof File && item.size > 0);
   const resendApiKey = process.env.RESEND_API_KEY;
 
@@ -46,9 +47,10 @@ export async function POST(request: Request) {
       from: process.env.RESEND_FROM || "Rakko Stay <onboarding@resend.dev>",
       to: [reviewRecipient],
       reply_to: email,
-      subject: `New Rakko Stay assessment request${propertyName ? `: ${escapeHtml(propertyName)}` : ""}`,
+      subject: `New Rakko Stay request · ${escapeHtml(serviceType)}${propertyName ? `: ${escapeHtml(propertyName)}` : ""}`,
       html: [
         "<h2>New assessment request</h2>",
+        `<p><strong>Service:</strong> ${escapeHtml(serviceType)}</p>`,
         `<p><strong>Email:</strong> ${escapeHtml(email)}</p>`,
         `<p><strong>Property:</strong> ${escapeHtml(propertyName || "Not provided")}</p>`,
         `<p><strong>URL:</strong> ${escapeHtml(websiteUrl || "Not provided")}</p>`,
@@ -65,6 +67,7 @@ export async function POST(request: Request) {
 
   console.info("Property review request received", {
     recipient: reviewRecipient,
+    serviceType,
     hasPropertyName: Boolean(propertyName),
     hasWebsiteUrl: Boolean(websiteUrl),
     hasPhotos: photos.length > 0,

@@ -104,9 +104,9 @@ function GuestFeedbackForm({ locale }: { locale: "en" | "ja" | "zh" }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const contactQr = {
-    en: { title: "Prefer WhatsApp?", body: "You can also scan and message us directly.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code" },
-    ja: { title: "LINEでも相談できます", body: "お急ぎの場合は、LINEからもご連絡いただけます。", image: "/contact/line-qr.jpg", alt: "LINE QRコード" },
-    zh: { title: "扫码添加微信", body: "也可以直接扫码添加微信沟通。", image: "/contact/wechat-qr.jpg", alt: "微信二维码" },
+    en: { title: "Prefer WhatsApp?", body: "You can also scan and message us directly.", image: "/contact/whatsapp-qr-scan.jpg", alt: "WhatsApp QR code" },
+    ja: { title: "LINEでも相談できます", body: "お急ぎの場合は、LINEからもご連絡いただけます。", image: "/contact/line-qr-scan.jpg", alt: "LINE QRコード" },
+    zh: { title: "扫码添加微信", body: "也可以直接扫码添加微信沟通。", image: "/contact/wechat-qr-scan.jpg", alt: "微信二维码" },
   }[locale];
 
   function validate(form: HTMLFormElement) {
@@ -147,7 +147,7 @@ function GuestFeedbackForm({ locale }: { locale: "en" | "ja" | "zh" }) {
       <label><span>{copy.fields.property}</span><input name="propertyName" type="text" placeholder={copy.placeholders.property} /></label>
       <label><span>{copy.fields.url}</span><input name="websiteUrl" type="url" placeholder={copy.placeholders.url} /></label>
     </div>
-    <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={360} height={360} unoptimized /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p></div></div>
+    <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={520} height={520} unoptimized /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p></div></div>
     {status === "error" && <p className="form-error">{copy.error}</p>}
     <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>
   </form>;

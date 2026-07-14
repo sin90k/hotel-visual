@@ -806,3 +806,61 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
     line-height:1.18;
   }
 }
+
+/* Final review-form cleanup */
+.home-review { scroll-margin-top:96px; padding-bottom:68px; }
+.home-review .contact-qr-card.wide {
+  grid-template-columns:284px 72px;
+  min-height:296px;
+  gap:10px;
+  padding:9px 10px;
+}
+.home-review .contact-qr-card.wide img {
+  width:284px;
+  height:284px;
+  object-fit:contain;
+  object-position:center;
+  border-radius:6px;
+  box-shadow:none;
+}
+.home-review .contact-qr-card.wide strong {
+  font-size:13px;
+  line-height:1.25;
+  margin:0;
+}
+.home-review .contact-qr-card.wide p,
+.home-review .contact-qr-card.wide .contact-qr-link {
+  display:none;
+}
+.home-review .file-upload-box {
+  display:grid;
+  grid-template-columns:1fr;
+  justify-items:start;
+  align-content:center;
+  gap:10px;
+  min-height:74px;
+  padding:12px;
+}
+.home-review .file-upload-box small {
+  text-align:left;
+}
+@media (max-width:860px) {
+  .home-review .contact-qr-card.wide {
+    grid-template-columns:minmax(0,1fr) 72px;
+  }
+  .home-review .contact-qr-card.wide img {
+    width:min(100%,320px);
+    height:auto;
+    aspect-ratio:1;
+    justify-self:start;
+  }
+}
+@media (max-width:560px) {
+  .home-review .contact-qr-card.wide {
+    grid-template-columns:1fr;
+  }
+  .home-review .contact-qr-card.wide img {
+    width:100%;
+    max-width:320px;
+  }
+}

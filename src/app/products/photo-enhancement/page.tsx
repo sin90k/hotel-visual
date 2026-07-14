@@ -69,9 +69,9 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
     zh: { label: "客房照片", choose: "添加照片", selected: (count: number) => `已选择 ${count}/5 张`, remove: "删除", help: "选填。最多添加 5 张现有客房照片，支持 JPG、PNG 或 WebP。" },
   }[locale];
   const contactQr = {
-    en: { title: "Prefer chat?", body: "Scan the QR code to add us on WhatsApp.", image: "/contact/whatsapp-qr.jpg", alt: "WhatsApp QR code", href: "https://wa.me/8618905957718", button: "Chat on WhatsApp" },
-    ja: { title: "LINEでも相談できます", body: "お急ぎの場合や、写真をそのまま送りたい場合はこちらからご連絡ください。", image: "/contact/line-qr.jpg", alt: "LINE QRコード", href: "mailto:sohoumin@gmail.com", button: "メールで相談する" },
-    zh: { title: "扫码添加微信", body: "也可以直接扫码添加微信沟通。", image: "/contact/wechat-qr.jpg", alt: "微信二维码", href: "mailto:sohoumin@gmail.com", button: "发送邮件咨询" },
+    en: { title: "Prefer chat?", body: "Scan the QR code to add us on WhatsApp.", image: "/contact/whatsapp-qr-scan.jpg", alt: "WhatsApp QR code", href: "https://wa.me/8618905957718", button: "Chat on WhatsApp" },
+    ja: { title: "LINEでも相談できます", body: "お急ぎの場合や、写真をそのまま送りたい場合はこちらからご連絡ください。", image: "/contact/line-qr-scan.jpg", alt: "LINE QRコード", href: "mailto:sohoumin@gmail.com", button: "メールで相談する" },
+    zh: { title: "扫码添加微信", body: "也可以直接扫码添加微信沟通。", image: "/contact/wechat-qr-scan.jpg", alt: "微信二维码", href: "mailto:sohoumin@gmail.com", button: "发送邮件咨询" },
   }[locale];
   const validationCopy = {
     en: { required: (field: string) => `Please enter ${field}.`, url: "Please enter a valid property or OTA URL.", email: "Please enter a valid email address." },
@@ -167,7 +167,7 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           {errors.websiteUrl && <small id="websiteUrl-error" className="field-error">{errors.websiteUrl}</small>}
         </label>
       </div>
-      <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={360} height={360} unoptimized /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p><a className="contact-qr-link" href={contactQr.href}>{contactQr.button}</a></div></div>
+      <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={520} height={520} unoptimized /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p><a className="contact-qr-link" href={contactQr.href}>{contactQr.button}</a></div></div>
       <div className="form-footer">
         <p>{copy.consent}</p>
         <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>

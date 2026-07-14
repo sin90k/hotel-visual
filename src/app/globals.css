@@ -868,7 +868,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 
 /* Compact assessment contact/upload row */
 .home-review form {
-  grid-template-columns:minmax(0,1fr) 220px;
+  grid-template-columns:minmax(0,1fr) 260px;
   gap:12px;
 }
 .home-review form,
@@ -880,33 +880,52 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 }
 .home-review .contact-qr-card.wide {
   grid-column:auto;
-  display:flex;
-  width:min(100%,330px);
-  min-height:0;
-  padding:8px;
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+  width:auto;
+  min-height:282px;
+  padding:16px 18px;
   align-items:center;
-  justify-content:center;
-  justify-self:end;
+  justify-content:stretch;
+  justify-self:stretch;
+  gap:18px;
 }
 .home-review .contact-qr-card.wide img {
-  width:min(100%,300px);
+  width:250px;
   height:auto;
   aspect-ratio:1;
   object-fit:contain;
   border-radius:4px;
 }
 .home-review .contact-qr-card.wide>div {
+  display:block;
+}
+.home-review .contact-qr-card.wide strong {
+  display:block;
+  font-size:17px;
+  line-height:1.35;
+  margin:0;
+}
+.home-review .contact-qr-card.wide p {
+  display:block;
+  max-width:190px;
+  margin:8px 0 0;
+  font-size:13px;
+  line-height:1.55;
+  color:rgba(11,55,91,.72);
+}
+.home-review .contact-qr-card.wide .contact-qr-link {
   display:none;
 }
 .home-review .file-field-compact.wide {
   grid-column:auto;
-  align-self:start;
-  padding:14px;
+  align-self:stretch;
+  padding:16px;
 }
 .home-review .file-field-compact.wide .file-upload-box {
-  min-height:76px;
-  padding:10px;
-  gap:8px;
+  min-height:104px;
+  padding:14px;
+  gap:10px;
   align-content:center;
 }
 .home-review .file-field-compact.wide .file-upload-box b {
@@ -929,9 +948,9 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .home-review .review-contact-upload-row.wide {
   grid-column:1/-1;
   display:grid;
-  grid-template-columns:330px 240px;
-  justify-content:center;
-  align-items:start;
+  grid-template-columns:minmax(0,1fr) 260px;
+  justify-content:stretch;
+  align-items:stretch;
   gap:12px;
 }
 .home-review .review-contact-upload-row.wide .contact-qr-card.wide,
@@ -952,10 +971,16 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   }
   .home-review .contact-qr-card.wide img {
     width:100%;
-    max-width:360px;
+    max-width:260px;
   }
   .home-review .contact-qr-card.wide {
     width:100%;
     justify-self:stretch;
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+  }
+  .home-review .contact-qr-card.wide p {
+    max-width:none;
   }
 }

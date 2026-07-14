@@ -147,7 +147,7 @@ function GuestFeedbackForm({ locale }: { locale: "en" | "ja" | "zh" }) {
       <label><span>{copy.fields.property}</span><input name="propertyName" type="text" placeholder={copy.placeholders.property} /></label>
       <label><span>{copy.fields.url}</span><input name="websiteUrl" type="url" placeholder={copy.placeholders.url} /></label>
     </div>
-    <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={108} height={108} /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p></div></div>
+    <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={360} height={360} unoptimized /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p></div></div>
     {status === "error" && <p className="form-error">{copy.error}</p>}
     <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>
   </form>;

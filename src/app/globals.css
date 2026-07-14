@@ -707,25 +707,30 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   padding:16px;
 }
 .contact-qr-card {
-  grid-template-columns:220px 1fr;
+  grid-template-columns:278px 118px;
   align-items:center;
-  min-height:238px;
-  padding:14px 18px;
+  justify-content:start;
+  gap:12px;
+  min-height:292px;
+  padding:10px 12px;
 }
 .contact-qr-card img {
-  width:220px;
-  height:220px;
-  border-radius:10px;
+  width:278px;
+  height:278px;
+  border-radius:8px;
+  object-fit:cover;
+  object-position:center;
   box-shadow:none;
 }
 .contact-qr-card strong {
-  font-size:20px;
+  font-size:16px;
+  line-height:1.25;
   margin-bottom:6px;
 }
 .contact-qr-card p {
-  max-width:210px;
-  font-size:14px;
-  line-height:1.45;
+  max-width:118px;
+  font-size:12px;
+  line-height:1.42;
 }
 .home-review form>button {
   justify-self:stretch;

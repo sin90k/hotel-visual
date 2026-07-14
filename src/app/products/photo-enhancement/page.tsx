@@ -167,7 +167,7 @@ function ReviewForm({ copy, locale }: { copy: (typeof dictionaries)["en"]["revie
           {errors.websiteUrl && <small id="websiteUrl-error" className="field-error">{errors.websiteUrl}</small>}
         </label>
       </div>
-      <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={108} height={108} /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p><a className="contact-qr-link" href={contactQr.href}>{contactQr.button}</a></div></div>
+      <div className="contact-qr-card"><Image className="contact-qr-image" src={contactQr.image} alt={contactQr.alt} width={360} height={360} unoptimized /><div><strong>{contactQr.title}</strong><p>{contactQr.body}</p><a className="contact-qr-link" href={contactQr.href}>{contactQr.button}</a></div></div>
       <div className="form-footer">
         <p>{copy.consent}</p>
         <button disabled={status === "sending"} className="button button-gold" type="submit">{status === "sending" ? copy.sending : copy.submit}<ArrowRight size={17} /></button>

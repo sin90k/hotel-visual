@@ -881,7 +881,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .home-review .contact-qr-card.wide {
   grid-column:auto;
   display:flex;
-  width:min(100%,420px);
+  width:min(100%,330px);
   min-height:0;
   padding:8px;
   align-items:center;
@@ -889,7 +889,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   justify-self:end;
 }
 .home-review .contact-qr-card.wide img {
-  width:min(100%,390px);
+  width:min(100%,300px);
   height:auto;
   aspect-ratio:1;
   object-fit:contain;
@@ -929,7 +929,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .home-review .review-contact-upload-row.wide {
   grid-column:1/-1;
   display:grid;
-  grid-template-columns:420px 220px;
+  grid-template-columns:330px 240px;
   justify-content:center;
   align-items:start;
   gap:12px;

@@ -881,17 +881,17 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .home-review .contact-qr-card.wide {
   grid-column:auto;
   display:grid;
-  grid-template-columns:250px minmax(0,1fr);
+  grid-template-columns:200px minmax(0,150px);
   width:auto;
-  min-height:282px;
-  padding:16px 18px;
+  min-height:232px;
+  padding:14px;
   align-items:center;
   justify-content:stretch;
   justify-self:stretch;
-  gap:18px;
+  gap:12px;
 }
 .home-review .contact-qr-card.wide img {
-  width:250px;
+  width:200px;
   height:auto;
   aspect-ratio:1;
   object-fit:contain;
@@ -902,16 +902,16 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 }
 .home-review .contact-qr-card.wide strong {
   display:block;
-  font-size:17px;
+  font-size:15px;
   line-height:1.35;
   margin:0;
 }
 .home-review .contact-qr-card.wide p {
   display:block;
-  max-width:190px;
-  margin:8px 0 0;
-  font-size:13px;
-  line-height:1.55;
+  max-width:145px;
+  margin:6px 0 0;
+  font-size:12px;
+  line-height:1.45;
   color:rgba(11,55,91,.72);
 }
 .home-review .contact-qr-card.wide .contact-qr-link {
@@ -920,17 +920,17 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .home-review .file-field-compact.wide {
   grid-column:auto;
   align-self:stretch;
-  padding:16px;
+  padding:18px;
 }
 .home-review .file-field-compact.wide .file-upload-box {
-  min-height:104px;
-  padding:14px;
-  gap:10px;
+  min-height:132px;
+  padding:18px;
+  gap:12px;
   align-content:center;
 }
 .home-review .file-field-compact.wide .file-upload-box b {
-  min-height:32px;
-  padding:0 12px;
+  min-height:38px;
+  padding:0 18px;
   white-space:nowrap;
 }
 .home-review .file-field-compact.wide .file-upload-box span {
@@ -948,7 +948,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .home-review .review-contact-upload-row.wide {
   grid-column:1/-1;
   display:grid;
-  grid-template-columns:minmax(0,1fr) 260px;
+  grid-template-columns:390px minmax(0,1fr);
   justify-content:stretch;
   align-items:stretch;
   gap:12px;
@@ -971,7 +971,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   }
   .home-review .contact-qr-card.wide img {
     width:100%;
-    max-width:260px;
+    max-width:220px;
   }
   .home-review .contact-qr-card.wide {
     width:100%;

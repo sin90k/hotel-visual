@@ -670,7 +670,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 }
 .home-review form {
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1.45fr) minmax(0,.8fr);
   gap:16px;
 }
 .home-review .form-email,
@@ -693,17 +693,26 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 .file-upload-box {
   min-height:86px;
 }
+.home-review .file-upload-box {
+  min-height:72px;
+  padding:12px;
+}
+.home-review .file-upload-box b {
+  min-height:34px;
+  padding:0 14px;
+  font-size:13px;
+}
 .photo-preview-grid {
   grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
   padding:16px;
 }
 .contact-qr-card {
-  grid-template-columns:124px 1fr;
-  padding:18px 20px;
+  grid-template-columns:158px 1fr;
+  padding:20px 24px;
 }
 .contact-qr-card img {
-  width:124px;
-  height:124px;
+  width:158px;
+  height:158px;
 }
 .home-review form>button {
   justify-self:stretch;

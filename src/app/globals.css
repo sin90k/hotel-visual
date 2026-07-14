@@ -670,7 +670,7 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 }
 .home-review form {
   display:grid;
-  grid-template-columns:minmax(0,1.45fr) minmax(0,.8fr);
+  grid-template-columns:minmax(0,1fr) 260px;
   gap:16px;
 }
 .home-review .form-email,
@@ -810,24 +810,22 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
 /* Final review-form cleanup */
 .home-review { scroll-margin-top:96px; padding-bottom:68px; }
 .home-review .contact-qr-card.wide {
-  grid-template-columns:284px 72px;
-  min-height:296px;
-  gap:10px;
-  padding:9px 10px;
+  grid-template-columns:1fr;
+  min-height:auto;
+  gap:0;
+  padding:10px;
+  justify-items:center;
 }
 .home-review .contact-qr-card.wide img {
-  width:284px;
-  height:284px;
+  width:min(100%,380px);
+  height:auto;
+  aspect-ratio:1;
   object-fit:contain;
   object-position:center;
   border-radius:6px;
   box-shadow:none;
 }
-.home-review .contact-qr-card.wide strong {
-  font-size:13px;
-  line-height:1.25;
-  margin:0;
-}
+.home-review .contact-qr-card.wide>div { display:none; }
 .home-review .contact-qr-card.wide p,
 .home-review .contact-qr-card.wide .contact-qr-link {
   display:none;
@@ -840,6 +838,9 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   gap:10px;
   min-height:74px;
   padding:12px;
+}
+.home-review .file-field-compact.wide {
+  align-self:start;
 }
 .home-review .file-upload-box small {
   text-align:left;
@@ -862,5 +863,99 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   .home-review .contact-qr-card.wide img {
     width:100%;
     max-width:320px;
+  }
+}
+
+/* Compact assessment contact/upload row */
+.home-review form {
+  grid-template-columns:minmax(0,1fr) 220px;
+  gap:12px;
+}
+.home-review form,
+.home-success {
+  padding:28px;
+}
+.home-review textarea {
+  min-height:104px;
+}
+.home-review .contact-qr-card.wide {
+  grid-column:auto;
+  display:flex;
+  width:min(100%,420px);
+  min-height:0;
+  padding:8px;
+  align-items:center;
+  justify-content:center;
+  justify-self:end;
+}
+.home-review .contact-qr-card.wide img {
+  width:min(100%,390px);
+  height:auto;
+  aspect-ratio:1;
+  object-fit:contain;
+  border-radius:4px;
+}
+.home-review .contact-qr-card.wide>div {
+  display:none;
+}
+.home-review .file-field-compact.wide {
+  grid-column:auto;
+  align-self:start;
+  padding:14px;
+}
+.home-review .file-field-compact.wide .file-upload-box {
+  min-height:76px;
+  padding:10px;
+  gap:8px;
+  align-content:center;
+}
+.home-review .file-field-compact.wide .file-upload-box b {
+  min-height:32px;
+  padding:0 12px;
+  white-space:nowrap;
+}
+.home-review .file-field-compact.wide .file-upload-box span {
+  font-size:13px;
+  line-height:1.3;
+}
+.home-review .file-field-compact.wide em {
+  margin-top:4px;
+  font-size:12px;
+  line-height:1.45;
+}
+.home-review form>button {
+  margin-top:2px;
+}
+.home-review .review-contact-upload-row.wide {
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:420px 220px;
+  justify-content:center;
+  align-items:start;
+  gap:12px;
+}
+.home-review .review-contact-upload-row.wide .contact-qr-card.wide,
+.home-review .review-contact-upload-row.wide .file-field-compact.wide {
+  grid-column:auto !important;
+}
+@media (max-width:860px) {
+  .home-review form {
+    grid-template-columns:1fr;
+  }
+  .home-review .review-contact-upload-row.wide {
+    grid-template-columns:1fr;
+    justify-content:stretch;
+  }
+  .home-review .contact-qr-card.wide,
+  .home-review .file-field-compact.wide {
+    grid-column:1;
+  }
+  .home-review .contact-qr-card.wide img {
+    width:100%;
+    max-width:360px;
+  }
+  .home-review .contact-qr-card.wide {
+    width:100%;
+    justify-self:stretch;
   }
 }

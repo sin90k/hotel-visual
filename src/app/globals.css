@@ -673,32 +673,16 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   gap:16px;
 }
-.home-review form>label {
-  order:6;
-}
-.home-review form>label:first-child {
-  order:1;
+.home-review .form-email,
+.home-review .wide,
+.home-review .photo-preview-grid.wide,
+.home-review .form-error.wide,
+.home-review form>button {
   grid-column:1/-1;
 }
-.home-review form>label:nth-child(2) {
-  order:2;
-  grid-column:1/-1;
-}
+.home-review .contact-qr-card.wide,
 .home-review .file-field-compact.wide {
-  order:3;
   grid-column:auto;
-}
-.home-review .contact-qr-card.wide {
-  order:4;
-  grid-column:auto;
-}
-.home-review .photo-preview-grid.wide {
-  order:5;
-  grid-column:1/-1;
-}
-.home-review .form-error.wide {
-  order:8;
-  grid-column:1/-1;
 }
 .home-review label {
   padding:18px 20px;
@@ -714,16 +698,14 @@ html[lang="en"] .feedback-roles h2 { font-size:clamp(38px,3.7vw,52px); line-heig
   padding:16px;
 }
 .contact-qr-card {
-  grid-template-columns:96px 1fr;
+  grid-template-columns:124px 1fr;
   padding:18px 20px;
 }
 .contact-qr-card img {
-  width:96px;
-  height:96px;
+  width:124px;
+  height:124px;
 }
 .home-review form>button {
-  order:9;
-  grid-column:1/-1;
   justify-self:stretch;
   min-height:56px;
   justify-content:center;
